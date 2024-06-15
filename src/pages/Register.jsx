@@ -5,7 +5,7 @@
 // import axios from "axios";
 import { useNavigate } from "react-router-dom"; // Import thêm các hook cần thiết từ react-router-dom
 import { NavLink } from "react-router-dom";
-import "../styles/auth.less";
+import "../styles/auth.css";
 import { Field, Form, Formik, useField } from "formik";
 import * as Yup from "yup";
 import { FcGoogle } from "react-icons/fc";

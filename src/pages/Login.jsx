@@ -1,7 +1,7 @@
 // import { saveInfoToLocalStorage } from "@/utils/product";
 // import { Helmet } from "react-helmet";
 import { NavLink } from "react-router-dom";
-import "../styles/auth.less";
+import "../styles/auth.css";
 import { Field, Form, Formik, useField } from "formik";
 import * as Yup from "yup";
 import { FcGoogle } from "react-icons/fc";
