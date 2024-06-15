@@ -1,0 +1,109 @@
+.task-list {
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  padding: 15px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  height: 100%;
+  position: relative;
+  /* Tùy chỉnh thanh cuộn cho Firefox */
+}
+.task-list .list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+.task-list .list .task-item {
+  position: relative;
+  width: 77%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  height: 200px;
+  padding: 12px;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  background-color: #f4f4f4;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
+.task-list .list .task-item .priority {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px;
+  color: #fff;
+  border-radius: 10px;
+}
+.task-list .list .task-item .title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: inline-block;
+  height: 30px;
+  border-radius: 20px;
+  padding: 6px 10px;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.task-list .list .task-item .title1 {
+  background: #e9dff4;
+  color: #6e26ac;
+}
+.task-list .list .task-item .title2 {
+  background: #f3e0cf;
+  color: #f27405;
+}
+.task-list .list .task-item .title3 {
+  background: #deeffa;
+  color: #057ec8;
+}
+.task-list .list .task-item .description,
+.task-list .list .task-item .due_date {
+  font-size: 1rem;
+  color: #b5b5b5;
+}
+.task-list .list .task-item .description {
+  width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.task-list::-webkit-scrollbar {
+  width: 3px;
+}
+.task-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+.task-list::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+  height: 2px;
+}
+.task-list::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.task-list.task-list-home {
+  scrollbar-width: none;
+  scrollbar-color: #888 #f1f1f1;
+}
+.task-list::-moz-scrollbar {
+  width: 3px;
+}
+.task-list::-moz-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+.task-list::-moz-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+  height: 2px;
+}
+.task-list::-moz-scrollbar-thumb:hover {
+  background: #555;
+}

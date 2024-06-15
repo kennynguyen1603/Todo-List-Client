@@ -1,0 +1,177 @@
+.auth {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(119deg, #c4e3cd 48%, #cbe7d3 67%, #d6e8db 92%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.auth .auth-content {
+  width: 85%;
+  height: 80vh;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 0.7fr;
+  border-radius: 10px;
+}
+.auth .auth-content .auth-left,
+.auth .auth-content .auth-right {
+  height: 100%;
+}
+.auth .auth-content .auth-left {
+  background-color: #e6feed;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 15px 0 0 15px;
+}
+.auth .auth-content .auth-left img {
+  background-color: transparent;
+  object-fit: contain;
+  padding: 20px;
+  max-height: 100%;
+}
+.auth .auth-content .auth-right {
+  background-color: #fafffb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 15px 15px 0;
+}
+.auth .auth-content .auth-right .auth-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+}
+.auth .auth-content .auth-right .auth-option .logo img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+}
+.auth .auth-content .auth-right .auth-option .formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  position: relative;
+}
+.auth .auth-content .auth-right .auth-option .formContainer .avatar {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.auth .auth-content .auth-right .auth-option .formContainer .avatar .avatarPreview {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  border-radius: 50%;
+}
+.auth .auth-content .auth-right .auth-option .formContainer .inputField {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 5px;
+}
+.auth .auth-content .auth-right .auth-option .formContainer .inputField .input {
+  width: 100%;
+  height: 47px;
+  padding: 10px;
+  margin-bottom: 5px;
+  border: 1px solid #9e9e9e;
+  border-radius: 5px;
+  background: none;
+}
+.auth .auth-content .auth-right .auth-option .formContainer .inputField .input.input:hover,
+.auth .auth-content .auth-right .auth-option .formContainer .inputField .input.input:valid {
+  outline: none;
+  border: 1.5px solid #9e9e9e;
+}
+.auth .auth-content .auth-right .auth-option .formContainer .inputField .input.input:focus ~ .label,
+.auth .auth-content .auth-right .auth-option .formContainer .inputField .input.input:valid ~ .label {
+  transform: translate(-10%, -100%) scale(0.9);
+  background-color: #fff;
+  padding: 0 0.7em;
+}
+.auth .auth-content .auth-right .auth-option .formContainer .inputField .label {
+  position: absolute;
+  left: 13px;
+  top: 11px;
+  color: #9e9e9e;
+  pointer-events: none;
+  transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.auth .auth-content .auth-right .auth-option .formContainer .inputField .errorMessage {
+  color: red;
+  height: 15px;
+  visibility: hidden;
+  font-size: 13px;
+}
+.auth .auth-content .auth-right .auth-option .formContainer .inputField .errorMessage.shown {
+  visibility: visible;
+}
+.auth .auth-content .auth-right .auth-option .formContainer .submitButton {
+  padding: 10px 20px;
+  background: #263238;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.auth .auth-content .auth-right .auth-option .formContainer .submitButton:active {
+  background-color: #465c67;
+}
+.auth .auth-content .auth-right .authSection {
+  text-align: center;
+  width: 100%;
+}
+.auth .auth-content .auth-right .authSection .separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0 0 10px;
+}
+.auth .auth-content .auth-right .authSection .separator .line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: #ccc;
+  border: none;
+}
+.auth .auth-content .auth-right .authSection .separator .or {
+  margin: 0 10px;
+  color: #757575;
+}
+.auth .auth-content .auth-right .authSection .googleSignIn {
+  outline: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #757575;
+  font-weight: bold;
+}
+.auth .auth-content .auth-right .authSection .googleSignIn .googleIcon {
+  width: 20px;
+  height: 30px;
+}
+.auth .auth-content .auth-right .authSection .googleSignIn:hover {
+  color: #4285f4;
+  font-size: large;
+  transition: all 0.2s ease-out;
+}
+.auth .auth-content .auth-right .authSection .googleSignIn:active {
+  color: red;
+}
+.auth .auth-content .auth-right .authSection .signUp {
+  margin-top: 10px;
+  color: #757575;
+  font-size: 16px;
+}
+.auth .auth-content .auth-right .authSection .signUp .signUpLink {
+  color: #4285f4;
+  text-decoration: none;
+}

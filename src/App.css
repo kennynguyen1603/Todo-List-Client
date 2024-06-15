@@ -1,0 +1,424 @@
+.main {
+  font-family: "Poppins", sans-serif;
+}
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body .main {
+  height: 100vh;
+  background-color: #5accbb;
+}
+body .main .wrapper {
+  margin: auto;
+  box-sizing: border-box;
+  position: absolute;
+  width: 85%;
+  height: 88vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  padding: 0 !important;
+}
+body .main .wrapper .sidebar {
+  width: 17%;
+  display: flex;
+  flex-direction: column;
+}
+body .main .wrapper .sidebar .header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 20%;
+  padding: 1.2vw;
+}
+body .main .wrapper .sidebar .header .headerLogo img {
+  width: 3.4vw;
+  height: 3.4vw;
+  margin-top: 0.5vh;
+}
+body .main .wrapper .sidebar .header .headerName {
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
+}
+body .main .wrapper .sidebar .header .headerName h1 {
+  font-size: 1.5vw;
+  color: #5accbb;
+}
+body .main .wrapper .sidebar .header .headerName div p {
+  font-size: 0.65vw;
+  color: red;
+}
+body .main .wrapper .sidebar .side {
+  height: 50vh;
+}
+body .main .wrapper .sidebar .side a {
+  height: 3.5rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 1rem;
+}
+body .main .wrapper .sidebar .side a .side-name,
+body .main .wrapper .sidebar .side a .side-icon {
+  font-size: 16px;
+  font-weight: 600;
+}
+body .main .wrapper .sidebar .side a .side-icon {
+  margin-left: 2vw;
+}
+body .main .wrapper .sidebar .side .active {
+  color: #5accbb;
+  background-color: azure;
+}
+body .main .wrapper .sidebar .footer {
+  height: 30vh;
+  background-color: #1ca486;
+  color: white;
+  width: 100%;
+  clip-path: circle(71% at 50% 88%);
+  position: relative;
+  border-radius: 20px;
+}
+body .main .wrapper .sidebar .footer .footer1 {
+  width: 100%;
+  height: 90%;
+  position: absolute;
+  bottom: 0;
+  background-color: #34dbb8;
+  border-radius: 0 20px;
+  clip-path: circle(67% at 50% 88%);
+  display: flex;
+  padding: 0 2vw;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+body .main .wrapper .sidebar .footer .footer1 .timer-container {
+  font-size: 1.3vw;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 10%;
+}
+body .main .wrapper .sidebar .footer .footer1 .timer-container .timer-date {
+  font-size: 1.3vw;
+  font-weight: 700;
+}
+body .main .wrapper .sidebar .footer .footer1 .timer-container .timer-time {
+  font-size: 1.2vw;
+  font-weight: 400;
+}
+body .main .wrapper .main-content {
+  width: 83%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body .main .wrapper .main-content .dashboard {
+  background-color: #ffffff;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 20px;
+  height: 100%;
+  border-radius: 20px;
+}
+body .main .wrapper .main-content .dashboard .taskOverview {
+  display: flex;
+  flex-direction: column;
+  padding: 0 15px 0 10px;
+  width: 100%;
+  height: 100%;
+}
+body .main .wrapper .main-content .dashboard .taskOverview .taskSummary .searchBar {
+  width: 100%;
+  padding: 0.7rem;
+  display: flex;
+  align-items: center;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  margin-bottom: 0.8rem;
+}
+body .main .wrapper .main-content .dashboard .taskOverview .taskSummary .searchBar:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+body .main .wrapper .main-content .dashboard .taskOverview .taskSummary .searchBar input {
+  width: 100%;
+  background-color: transparent;
+  margin-left: 5px;
+}
+body .main .wrapper .main-content .dashboard .taskOverview .taskSummary .searchBar input:focus {
+  outline: none;
+}
+body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .tasksToggle {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 1vw;
+}
+body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .tasksToggle .toggle-btn {
+  font-size: 1.1rem;
+  color: #b5b5b5;
+}
+body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .tasksToggle .active-btn {
+  color: #fabb18;
+}
+body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .taskListOverview {
+  max-height: 56vh;
+  height: 100%;
+}
+body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .taskListOverview .task-list {
+  /* Tùy chỉnh thanh cuộn cho Firefox */
+}
+body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .taskListOverview .task-list.task-list::-webkit-scrollbar {
+  width: 3px;
+}
+body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .taskListOverview .task-list.task-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .taskListOverview .task-list.task-list::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+  height: 2px;
+}
+body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .taskListOverview .task-list.task-list::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .taskListOverview .task-list.task-list {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .taskListOverview .task-list.task-list::-moz-scrollbar {
+  width: 3px;
+}
+body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .taskListOverview .task-list.task-list::-moz-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .taskListOverview .task-list.task-list::-moz-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+  height: 2px;
+}
+body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .taskListOverview .task-list.task-list::-moz-scrollbar-thumb:hover {
+  background: #555;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule {
+  height: 100%;
+  width: 100%;
+  padding: 0 0.7%;
+  position: relative;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .header .inforUser {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .header .inforUser .profile-pic {
+  width: 4.5vw;
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .header .inforUser .profile-name {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .header .inforUser .profile-career {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #c4c4c4;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .header .elements {
+  font-size: 1.6rem;
+  gap: 7px;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .time-tracker {
+  background-color: #ffffff;
+  height: 10vh;
+  width: 100%;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  align-items: center;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .time-tracker .play-icon {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background-color: #5accbb;
+  font-size: 1.3rem;
+  border-radius: 10px;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .time-tracker .play-icon .icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .taskButton {
+  position: absolute;
+  top: -8px;
+  right: 0;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .taskButton .task-button {
+  font-size: 14px;
+  padding: 5px;
+  height: 2.5rem;
+  width: 110px;
+  font-weight: 600;
+  border-radius: 15px;
+  color: #5accbb;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .taskButton .task-button:hover {
+  background-color: #5accbb;
+  color: #000;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .calendar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .calendar .week-names,
+body .main .wrapper .main-content .dashboard .todaysSchedule .calendar .week-dates,
+body .main .wrapper .main-content .dashboard .todaysSchedule .calendar .next-week-dates {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  position: relative;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .calendar .day-name,
+body .main .wrapper .main-content .dashboard .todaysSchedule .calendar .day-date {
+  flex: 0.1;
+  text-align: center;
+  padding: 4px;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .calendar .day-date.selected {
+  background-color: #fabb18;
+  color: #fff;
+  border-radius: 50%;
+  border: 1px solid #0a0a0a;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .calendar .active {
+  color: #fabb18;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .calendar .active::after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  margin: 0 auto;
+  background-color: #fabb18;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .taskByDate {
+  height: 100%;
+  max-height: 30.5vh;
+  position: relative;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .taskByDate .task-list .list .task-item {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out, border-color 0.3s ease-in-out;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .taskByDate .task-list .list .task-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .taskByDate .task-list .list .task-item.visible::before {
+  border-color: #fff;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .taskByDate .task-list .list .task-item::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -42px;
+  width: 2px;
+  height: 220px;
+  background-color: #ffcc00;
+  z-index: 0;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .taskByDate .task-list .list .task-item::before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: -50px;
+  width: 18px;
+  height: 18px;
+  background-color: #ffcc00;
+  border: 2px solid #ffcc00;
+  border-radius: 50%;
+  z-index: 1;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .taskStatus .statusBars {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .taskStatus .statusBars .statusLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .taskStatus .statusBars .statusLabel .statusDot {
+  height: 9px;
+  width: 9px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+body .main .wrapper .main-content .dashboard .todaysSchedule .taskStatus .processBox {
+  height: 40px;
+  padding: 5px;
+  font: 14px sans-serif;
+  margin-right: 10px;
+  background: pink;
+  border-radius: 10px;
+  width: 95%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .wrapper {
+    flex-direction: column;
+  }
+  .sidebar,
+  .todaysSchedule {
+    width: 100%;
+    padding: 10px;
+  }
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.custom-scrollbar {
+  max-height: 70vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+  /* Firefox */
+}
+.custom-scrollbar::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, and Opera */
+}
+.sticky-footer {
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  padding-top: 1rem;
+}
