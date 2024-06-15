@@ -1,6 +1,6 @@
 // import React from "react";
 import { Outlet } from "react-router-dom";
-import "../styles/auth.less";
+import "../styles/auth.css";
 const LayoutAuth = () => {
   return (
     <div className="auth">
