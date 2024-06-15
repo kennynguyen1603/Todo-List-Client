@@ -9,7 +9,7 @@ import TaskLists from "./pages/TaskLists";
 import Profile from "./pages/Profile";
 import Team from "./pages/Team";
 import CustomCalendar from "./pages/CustomCalendar";
-import "./App.less";
+import "./App.css";
 import { AuthProvider } from "./context/AuthContext";
 import TaskListDetail from "../src/components/TaskList/TaskListDetail";
 import TaskDetail from "./pages/TaskDetail";
