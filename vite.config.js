@@ -11,11 +11,14 @@ export default defineConfig({
       plugins: [tailwindcss, autoprefixer],
     },
   },
+
   build: {
-    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
-        manualChunks() {},
+        manualChunks: {
+          vendor: ["react", "react-dom"], // tách riêng các thư viện bên thứ ba
+          "lodash-vendor": ["lodash"],
+        },
       },
     },
   },

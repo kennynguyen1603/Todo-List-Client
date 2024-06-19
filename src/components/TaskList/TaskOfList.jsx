@@ -192,11 +192,9 @@ const TaskOfList = ({
       <td className="p-2 text-center">
         <Dropdown>
           <Tooltip title="Set Priority" placement="top">
-            <MenuButton className="w-28 flex gap-2" size="sm">
+            <MenuButton className="w-28" size="sm">
               {getPriorityIcon(task.priority)}
-              <div className="flex justify-start items-start">
-                {task.priority}
-              </div>
+              <div className="flex-1 justify-start">{task.priority}</div>
             </MenuButton>
           </Tooltip>
           <Menu className="w-28">
@@ -233,7 +231,7 @@ const TaskOfList = ({
           <Tooltip title="Set Status" placement="top">
             {task.status === "Not Started" ? (
               <MenuButton variant="solid" size="sm">
-                <div className="flex items-center gap-2 ">
+                <div className="flex items-center gap-2">
                   {getStatusIcon(task.status)}
                   Not Started
                 </div>
@@ -254,7 +252,7 @@ const TaskOfList = ({
               </MenuButton>
             )}
           </Tooltip>
-          <Menu className="">
+          <Menu>
             <MenuItem
               onClick={() => handleChange(task._id, "status", "Completed")}
             >

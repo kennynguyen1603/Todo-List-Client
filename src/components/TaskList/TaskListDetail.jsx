@@ -11,32 +11,31 @@ import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { AuthContext } from "../../context/AuthContext";
 import TaskOfList from "./TaskOfList";
 import Navigation from "./Navigation";
+import "../../styles/viewlist/viewlist.css";
+import { IoCheckmarkCircleSharp } from "react-icons/io5";
+import { MdOutlineRadioButtonChecked } from "react-icons/md";
 
 const TaskListDetail = () => {
+  const { id } = useParams();
+  const { tasksUser, setTaskLists } = useContext(AuthContext) || {};
   const [list, setList] = useState({ name: "" });
   const [tasksOfList, setTasksOfList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isDraggingDisabled, setIsDraggingDisabled] = useState(false);
-  const { id } = useParams();
   const [selectedTasks, setSelectedTasks] = useState([]);
-  const { tasksUser, taskLists, setTaskLists } = useContext(AuthContext) || {};
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await api.get(`/todoList/${id}/todos`);
-        const listTasksId = response.data.data.todolist;
-        setList(response.data.data);
+        const { data } = await api.get(`/todoList/${id}/todos`);
+        setList(data.data);
         const fetchedTasks = await Promise.all(
-          listTasksId.map(async (taskId) => {
-            const task = await getTaskById(taskId);
-            return task;
-          })
+          data.data.todolist.map(getTaskById)
         );
         setTasksOfList(fetchedTasks);
-        setLoading(false);
       } catch (error) {
         console.error("Failed to fetch tasks:", error);
+      } finally {
         setLoading(false);
       }
     };
@@ -52,7 +51,6 @@ const TaskListDetail = () => {
     newTasksOfList.splice(result.destination.index, 0, movedTask);
 
     setTasksOfList(newTasksOfList);
-
     try {
       await updateTask(movedTask._id, { status: movedTask.status });
     } catch (error) {
@@ -61,35 +59,31 @@ const TaskListDetail = () => {
   };
 
   const handleTaskSelect = (taskId) => {
-    if (selectedTasks.includes(taskId)) {
-      setSelectedTasks(selectedTasks.filter((id) => id !== taskId));
-    } else {
-      setSelectedTasks([...selectedTasks, taskId]);
-    }
+    setSelectedTasks((prev) =>
+      prev.includes(taskId)
+        ? prev.filter((id) => id !== taskId)
+        : [...prev, taskId]
+    );
   };
 
   const handleBulkAction = async (field, value) => {
     try {
       const updates = { [field]: value };
-
       await Promise.all(
         selectedTasks.map((taskId) => updateTaskById(taskId, updates))
       );
-
-      const updatedTasks = tasksOfList.map((task) =>
-        selectedTasks.includes(task._id) ? { ...task, ...updates } : task
+      setTasksOfList((prev) =>
+        prev.map((task) =>
+          selectedTasks.includes(task._id) ? { ...task, ...updates } : task
+        )
       );
-      setTasksOfList(updatedTasks);
     } catch (error) {
       console.error("Failed to perform bulk action:", error);
     }
   };
 
-  const handleDueDateChange = async (date) => {
-    const formattedDate = date ? date.format("YYYY-MM-DD") : null;
-    console.log("formattedDate", formattedDate);
-    await handleBulkAction("due_date", formattedDate);
-  };
+  const handleDueDateChange = (date) =>
+    handleBulkAction("due_date", date ? date.format("YYYY-MM-DD") : null);
 
   const handleRemoveFromList = async () => {
     try {
@@ -98,27 +92,22 @@ const TaskListDetail = () => {
           api.delete(`/todoList/${id}/todos/${taskId}`)
         )
       );
-
-      const updatedTasks = tasksOfList.filter(
-        (task) => !selectedTasks.includes(task._id)
+      setTasksOfList((prev) =>
+        prev.filter((task) => !selectedTasks.includes(task._id))
       );
-
-      setTasksOfList(updatedTasks);
-
-      const updatedTaskLists = taskLists.map((taskList) => {
-        if (taskList._id === id) {
-          return {
-            ...taskList,
-            todolist: taskList.todolist.filter(
-              (taskId) => !selectedTasks.includes(taskId)
-            ),
-            completedTasks: taskList.completedTasks - selectedTasks.length,
-          };
-        }
-        return taskList;
-      });
-
-      setTaskLists(updatedTaskLists);
+      setTaskLists((prev) =>
+        prev.map((taskList) =>
+          taskList._id === id
+            ? {
+                ...taskList,
+                todolist: taskList.todolist.filter(
+                  (taskId) => !selectedTasks.includes(taskId)
+                ),
+                completedTasks: taskList.completedTasks - selectedTasks.length,
+              }
+            : taskList
+        )
+      );
       setSelectedTasks([]);
     } catch (error) {
       console.error("Failed to remove tasks from list:", error);
@@ -127,36 +116,37 @@ const TaskListDetail = () => {
 
   const handleDeleteTask = async () => {
     try {
-      await Promise.all(selectedTasks.map((taskId) => deleteTask(taskId)));
-
-      const updatedTasks = tasksOfList.filter(
-        (task) => !selectedTasks.includes(task._id)
+      await Promise.all(selectedTasks.map(deleteTask));
+      setTasksOfList((prev) =>
+        prev.filter((task) => !selectedTasks.includes(task._id))
       );
-
-      const updatedTaskLists = taskLists.map((taskList) => {
-        if (taskList._id === id) {
-          return {
-            ...taskList,
-            todolist: taskList.todolist.filter(
-              (taskId) => !selectedTasks.includes(taskId)
-            ),
-            completedTasks: taskList.completedTasks - selectedTasks.length,
-          };
-        }
-        return taskList;
-      });
-
-      setTaskLists(updatedTaskLists);
-      setTasksOfList(updatedTasks);
+      setTaskLists((prev) =>
+        prev.map((taskList) =>
+          taskList._id === id
+            ? {
+                ...taskList,
+                todolist: taskList.todolist.filter(
+                  (taskId) => !selectedTasks.includes(taskId)
+                ),
+                completedTasks: taskList.completedTasks - selectedTasks.length,
+              }
+            : taskList
+        )
+      );
       setSelectedTasks([]);
     } catch (error) {
       console.error("Failed to delete tasks:", error);
     }
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const getStatusIcon = (status) =>
+    status === "Completed" ? (
+      <IoCheckmarkCircleSharp />
+    ) : (
+      <MdOutlineRadioButtonChecked />
+    );
+
+  if (loading) return <div>Loading...</div>;
 
   const tasksByStatus = tasksOfList.reduce((acc, task) => {
     acc[task.status] = acc[task.status] || [];
@@ -176,33 +166,48 @@ const TaskListDetail = () => {
   ];
 
   return (
-    <div className="container mx-auto py-2">
-      <div className="mb-4 h-10 flex justify-center transition-all ease-in-out delay-300">
-        {selectedTasks.length > 0 ? (
-          <Navigation
-            onBulkAction={handleBulkAction}
-            onRemoveFromList={handleRemoveFromList}
-            onDeleteTask={handleDeleteTask}
-            onDueDateChange={handleDueDateChange}
-            selectedTasks={selectedTasks}
-            setTasksOfList={setTasksOfList}
-          />
-        ) : (
-          <h1 className="text-2xl font-bold">
-            {list.name} - Task List Details
-          </h1>
-        )}
+    <div className="container mx-auto p-2">
+      <div className="mb-4 h-10 flex justify-center relative">
+        <Navigation
+          onBulkAction={handleBulkAction}
+          onRemoveFromList={handleRemoveFromList}
+          onDeleteTask={handleDeleteTask}
+          onDueDateChange={handleDueDateChange}
+          selectedTasks={selectedTasks}
+          setTasksOfList={setTasksOfList}
+          slideDown={selectedTasks.length > 0}
+        />
+        <h1
+          className={`text-2xl font-bold absolute top-2 transition-transform ease-in-out delay-300 ${
+            selectedTasks.length ? "translate-y-[-200px]" : "translate-y-0"
+          }`}
+        >
+          {list.name}
+        </h1>
       </div>
+
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="flex flex-wrap justify-center overflow-y-auto max-h-[80vh]">
           {statuses.map(
             (status) =>
-              tasksByStatus[status] &&
-              tasksByStatus[status].length > 0 && (
-                <div key={status} className="mb-4 flex-grow">
-                  <h2 className="text-xl font-bold uppercase text-center">
+              tasksByStatus[status] && (
+                <div
+                  key={status}
+                  className="mb-4 flex-grow text-sm font-medium uppercase mt-2"
+                >
+                  <div
+                    className={`flex items-center justify-center gap-2 bg-${
+                      status === "Completed"
+                        ? "[#1F7A1F]"
+                        : status === "In Progress"
+                        ? "[#0B6BBB]"
+                        : "[#636B74]"
+                    } text-white w-[130px] p-1 rounded-md mb-2`}
+                  >
+                    {getStatusIcon(status)}
                     {status}
-                  </h2>
+                  </div>
+
                   <table className="min-w-full bg-white table-auto mb-2">
                     <thead>
                       <tr className="border-b">

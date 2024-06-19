@@ -10,37 +10,35 @@ import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { AuthContext } from "../../context/AuthContext";
 import TaskOfList from "./TaskOfList";
 import Navigation from "./Navigation";
-
 import PropTypes from "prop-types";
 
-const ViewList = ({ id, taskList }) => {
+const TaskListView = ({ id, taskList }) => {
   const [list, setList] = useState({ name: "" });
   const [tasksOfList, setTasksOfList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isDraggingDisabled, setIsDraggingDisabled] = useState(false);
   const [selectedTasks, setSelectedTasks] = useState([]);
   const { tasksUser, taskLists, setTaskLists } = useContext(AuthContext) || {};
+
   useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const response = await api.get(`/todoList/${id}/todos`);
-        const listTasksId = response.data.data.todolist;
-        setList(response.data.data);
-        const fetchedTasks = await Promise.all(
-          listTasksId.map(async (taskId) => {
-            const task = await getTaskById(taskId);
-            return task;
-          })
-        );
-        setTasksOfList(fetchedTasks);
-        setLoading(false);
-      } catch (error) {
-        console.error("Failed to fetch tasks:", error);
-        setLoading(false);
-      }
-    };
-    fetchTasks();
+    fetchTasks(id);
   }, [id, tasksUser]);
+
+  const fetchTasks = async (listId) => {
+    try {
+      const response = await api.get(`/todoList/${listId}/todos`);
+      const listTasksId = response.data.data.todolist;
+      setList(response.data.data);
+      const fetchedTasks = await Promise.all(
+        listTasksId.map(async (taskId) => await getTaskById(taskId))
+      );
+      setTasksOfList(fetchedTasks);
+      setLoading(false);
+    } catch (error) {
+      console.error("Failed to fetch tasks:", error);
+      setLoading(false);
+    }
+  };
 
   const onDragEnd = async (result) => {
     if (!result.destination || isDraggingDisabled) return;
@@ -60,21 +58,20 @@ const ViewList = ({ id, taskList }) => {
   };
 
   const handleTaskSelect = (taskId) => {
-    if (selectedTasks.includes(taskId)) {
-      setSelectedTasks(selectedTasks.filter((id) => id !== taskId));
-    } else {
-      setSelectedTasks([...selectedTasks, taskId]);
-    }
+    setSelectedTasks((prevSelectedTasks) =>
+      prevSelectedTasks.includes(taskId)
+        ? prevSelectedTasks.filter((id) => id !== taskId)
+        : [...prevSelectedTasks, taskId]
+    );
   };
 
   const handleBulkAction = async (field, value) => {
-    try {
-      const updates = { [field]: value };
+    const updates = { [field]: value };
 
+    try {
       await Promise.all(
         selectedTasks.map((taskId) => updateTaskById(taskId, updates))
       );
-
       const updatedTasks = tasksOfList.map((task) =>
         selectedTasks.includes(task._id) ? { ...task, ...updates } : task
       );
@@ -86,7 +83,6 @@ const ViewList = ({ id, taskList }) => {
 
   const handleDueDateChange = async (date) => {
     const formattedDate = date ? date.format("YYYY-MM-DD") : null;
-    console.log("formattedDate", formattedDate);
     await handleBulkAction("due_date", formattedDate);
   };
 
@@ -101,21 +97,19 @@ const ViewList = ({ id, taskList }) => {
       const updatedTasks = tasksOfList.filter(
         (task) => !selectedTasks.includes(task._id)
       );
-
       setTasksOfList(updatedTasks);
 
-      const updatedTaskLists = taskLists.map((taskList) => {
-        if (taskList._id === id) {
-          return {
-            ...taskList,
-            todolist: taskList.todolist.filter(
-              (taskId) => !selectedTasks.includes(taskId)
-            ),
-            completedTasks: taskList.completedTasks - selectedTasks.length,
-          };
-        }
-        return taskList;
-      });
+      const updatedTaskLists = taskLists.map((taskList) =>
+        taskList._id === id
+          ? {
+              ...taskList,
+              todolist: taskList.todolist.filter(
+                (taskId) => !selectedTasks.includes(taskId)
+              ),
+              completedTasks: taskList.completedTasks - selectedTasks.length,
+            }
+          : taskList
+      );
 
       setTaskLists(updatedTaskLists);
       setSelectedTasks([]);
@@ -127,23 +121,21 @@ const ViewList = ({ id, taskList }) => {
   const handleDeleteTask = async () => {
     try {
       await Promise.all(selectedTasks.map((taskId) => deleteTask(taskId)));
-
       const updatedTasks = tasksOfList.filter(
         (task) => !selectedTasks.includes(task._id)
       );
 
-      const updatedTaskLists = taskLists.map((taskList) => {
-        if (taskList._id === id) {
-          return {
-            ...taskList,
-            todolist: taskList.todolist.filter(
-              (taskId) => !selectedTasks.includes(taskId)
-            ),
-            completedTasks: taskList.completedTasks - selectedTasks.length,
-          };
-        }
-        return taskList;
-      });
+      const updatedTaskLists = taskLists.map((taskList) =>
+        taskList._id === id
+          ? {
+              ...taskList,
+              todolist: taskList.todolist.filter(
+                (taskId) => !selectedTasks.includes(taskId)
+              ),
+              completedTasks: taskList.completedTasks - selectedTasks.length,
+            }
+          : taskList
+      );
 
       setTaskLists(updatedTaskLists);
       setTasksOfList(updatedTasks);
@@ -175,11 +167,17 @@ const ViewList = ({ id, taskList }) => {
   ];
 
   return (
-    <div className="container mx-auto relative">
+    <div className="container relative border taskListView">
       <div
-        className={`absolute left-0 top-0 w-4 h-full bg-[${taskList.color}] z-10`}
+        className={`w-1 h-full`}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          backgroundColor: `${taskList.color}`,
+        }}
       ></div>
-      <div className="mb-4 h-10 flex justify-center transition-all ease-in-out delay-300">
+      <div className="mb-4 h-10 flex justify-center custom-scrollbar">
         {selectedTasks.length > 0 ? (
           <Navigation
             onBulkAction={handleBulkAction}
@@ -188,6 +186,7 @@ const ViewList = ({ id, taskList }) => {
             onDueDateChange={handleDueDateChange}
             selectedTasks={selectedTasks}
             setTasksOfList={setTasksOfList}
+            slideDown={true}
           />
         ) : (
           <h1 className="text-2xl font-bold">
@@ -202,9 +201,7 @@ const ViewList = ({ id, taskList }) => {
               tasksByStatus[status] &&
               tasksByStatus[status].length > 0 && (
                 <div key={status} className="mb-4 flex-grow">
-                  <h2 className="text-xl font-bold uppercase text-center">
-                    {status}
-                  </h2>
+                  <h2 className="text-xl font-bold uppercase ml-2">{status}</h2>
                   <table className="min-w-full bg-white table-auto mb-2">
                     <thead>
                       <tr className="border-b">
@@ -261,9 +258,9 @@ const ViewList = ({ id, taskList }) => {
   );
 };
 
-ViewList.propTypes = {
+TaskListView.propTypes = {
   id: PropTypes.string.isRequired,
   taskList: PropTypes.object.isRequired,
 };
 
-export default ViewList;
+export default TaskListView;

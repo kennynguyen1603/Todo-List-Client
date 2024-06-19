@@ -1,0 +1,12 @@
+.taskListView .custom-scrollbar {
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.navigation {
+  position: relative;
+  top: -200px;
+  transition: top 0.5s ease-in-out;
+}
+.navigation.slide-down {
+  top: 0;
+}

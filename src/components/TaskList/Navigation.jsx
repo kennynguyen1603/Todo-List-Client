@@ -14,7 +14,7 @@ import { HiFlag } from "react-icons/hi";
 import { IoCheckmarkCircleSharp } from "react-icons/io5";
 import { MdOutlineRadioButtonChecked } from "react-icons/md";
 import debounce from "lodash.debounce";
-import api from "../../config/axios"; // Assuming you have an axios instance configured
+import api from "../../config/axios";
 import { DatePicker, Popover } from "antd";
 import { updateTeam } from "../../server/team";
 import { getTaskById } from "../../server/todo";
@@ -26,11 +26,11 @@ const Navigation = ({
   onDueDateChange,
   selectedTasks,
   setTasksOfList,
+  slideDown,
 }) => {
   const [selectedEmails, setSelectedEmails] = useState([]); // Selected emails
   const [emailSearch, setEmailSearch] = useState(""); // Email search field
   const [teamMembers, setTeamMembers] = useState([]); // Team members list
-  console.log("🚀 ~ teamMembers:", teamMembers);
 
   // tìm email
   const debouncedSearch = useCallback(
@@ -108,7 +108,11 @@ const Navigation = ({
   };
 
   return (
-    <div className="w-3/5 flex items-center justify-evenly gap-2 text-lg text-center bg-[#5ACCBB] text-white rounded-full ">
+    <div
+      className={`navigation w-3/5 flex items-center justify-evenly gap-2 text-lg text-center bg-[#5ACCBB] text-white rounded-full ${
+        slideDown ? "slide-down" : ""
+      }`}
+    >
       <Dropdown>
         <Tooltip title="Set assignees">
           <MenuButton>
@@ -247,6 +251,7 @@ Navigation.propTypes = {
   onDueDateChange: PropTypes.func.isRequired,
   selectedTasks: PropTypes.array.isRequired,
   setTasksOfList: PropTypes.func.isRequired,
+  slideDown: PropTypes.bool,
 };
 
 export default Navigation;

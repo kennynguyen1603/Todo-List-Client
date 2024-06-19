@@ -42,6 +42,13 @@ const Sidebar = () => {
           <TfiLayoutListThumb className="side-icon" />
           <p className="side-name">Task Lists</p>
         </NavLink>
+        {/* <NavLink
+          key={id}
+          to={`/TaskLists/${id}`}
+          className="sub-list-item"
+        >
+          {list.name}
+        </NavLink> */}
         {/* <NavLink to="/Team" className={` ${activeClass}`}>
           <RiTeamLine className="side-icon" />
           <p className="side-name">Team</p>

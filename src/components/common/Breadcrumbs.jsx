@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import api from "../config/axios";
+import api from "../../config/axios";
 
 const Breadcrumbs = () => {
   const location = useLocation();
