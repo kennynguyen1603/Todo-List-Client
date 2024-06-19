@@ -11,7 +11,7 @@ import Team from "./pages/Team";
 import CustomCalendar from "./pages/CustomCalendar";
 import "./App.css";
 import { AuthProvider } from "./context/AuthContext";
-import TaskListDetail from "../src/components/TaskList/TaskListDetail";
+import TaskListDetail from "../src/components/TaskLists/TaskListDetail";
 import TaskDetail from "./pages/TaskDetail";
 
 const App = () => {

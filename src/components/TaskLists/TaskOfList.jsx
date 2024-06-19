@@ -157,7 +157,7 @@ const TaskOfList = ({
       ref={provided.innerRef}
       {...provided.draggableProps}
       {...provided.dragHandleProps}
-      className={`p-2 border rounded mb-2 bg-white ${
+      className={`p-2 border-b rounded mb-2 bg-white ${
         snapshot.isDragging ? "opacity-50" : "opacity-100"
       }`}
     >

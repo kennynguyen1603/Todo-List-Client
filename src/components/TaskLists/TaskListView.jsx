@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback, useRef } from "react";
 import api from "../../config/axios";
 import {
   getTaskById,
@@ -11,7 +11,8 @@ import { AuthContext } from "../../context/AuthContext";
 import TaskOfList from "./TaskOfList";
 import Navigation from "./Navigation";
 import PropTypes from "prop-types";
-
+import { IoCheckmarkCircleSharp } from "react-icons/io5";
+import { MdOutlineRadioButtonChecked } from "react-icons/md";
 const TaskListView = ({ id, taskList }) => {
   const [list, setList] = useState({ name: "" });
   const [tasksOfList, setTasksOfList] = useState([]);
@@ -20,25 +21,34 @@ const TaskListView = ({ id, taskList }) => {
   const [selectedTasks, setSelectedTasks] = useState([]);
   const { tasksUser, taskLists, setTaskLists } = useContext(AuthContext) || {};
 
-  useEffect(() => {
-    fetchTasks(id);
-  }, [id, tasksUser]);
+  const prevTasksUserRef = useRef(tasksUser);
+  const isFirstRender = useRef(true);
 
-  const fetchTasks = async (listId) => {
+  const fetchTasks = useCallback(async () => {
     try {
-      const response = await api.get(`/todoList/${listId}/todos`);
+      const response = await api.get(`/todoList/${id}/todos`);
       const listTasksId = response.data.data.todolist;
       setList(response.data.data);
-      const fetchedTasks = await Promise.all(
-        listTasksId.map(async (taskId) => await getTaskById(taskId))
-      );
+      const fetchedTasks = await Promise.all(listTasksId.map(getTaskById));
       setTasksOfList(fetchedTasks);
       setLoading(false);
     } catch (error) {
       console.error("Failed to fetch tasks:", error);
       setLoading(false);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      fetchTasks();
+      isFirstRender.current = false;
+    } else if (
+      JSON.stringify(tasksUser) !== JSON.stringify(prevTasksUserRef.current)
+    ) {
+      fetchTasks();
+      prevTasksUserRef.current = tasksUser;
+    }
+  }, [tasksUser, fetchTasks]);
 
   const onDragEnd = async (result) => {
     if (!result.destination || isDraggingDisabled) return;
@@ -166,9 +176,22 @@ const TaskListView = ({ id, taskList }) => {
     "Lists",
   ];
 
+  const getStatusIcon = (status) =>
+    status === "Completed" ? (
+      <IoCheckmarkCircleSharp />
+    ) : (
+      <MdOutlineRadioButtonChecked />
+    );
+
   return (
-    <div className="container relative border taskListView">
-      <div
+    <div
+      className="container relative border rounded-md px-4 py-2"
+      style={{
+        borderLeft:
+          taskList.color === "#FFFFFF" ? "" : `4px solid ${taskList.color}`,
+      }}
+    >
+      {/* <div
         className={`w-1 h-full`}
         style={{
           position: "absolute",
@@ -176,8 +199,8 @@ const TaskListView = ({ id, taskList }) => {
           left: 0,
           backgroundColor: `${taskList.color}`,
         }}
-      ></div>
-      <div className="mb-4 h-10 flex justify-center custom-scrollbar">
+      ></div> */}
+      <div className="mb-4 h-10 flex justify-center">
         {selectedTasks.length > 0 ? (
           <Navigation
             onBulkAction={handleBulkAction}
@@ -195,13 +218,27 @@ const TaskListView = ({ id, taskList }) => {
         )}
       </div>
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className="flex flex-wrap justify-center overflow-y-auto max-h-[80vh]">
+        <div className="flex flex-wrap justify-center">
           {statuses.map(
             (status) =>
-              tasksByStatus[status] &&
-              tasksByStatus[status].length > 0 && (
-                <div key={status} className="mb-4 flex-grow">
-                  <h2 className="text-xl font-bold uppercase ml-2">{status}</h2>
+              tasksByStatus[status] && (
+                <div
+                  key={status}
+                  className="mb-4 flex-grow text-sm font-medium uppercase mt-2"
+                >
+                  <div
+                    className={`flex items-center justify-center gap-2 bg-${
+                      status === "Completed"
+                        ? "[#1F7A1F]"
+                        : status === "In Progress"
+                        ? "[#0B6BBB]"
+                        : "[#636B74]"
+                    } text-white w-[130px] p-1 rounded-md mb-2`}
+                  >
+                    {getStatusIcon(status)}
+                    {status}
+                  </div>
+
                   <table className="min-w-full bg-white table-auto mb-2">
                     <thead>
                       <tr className="border-b">

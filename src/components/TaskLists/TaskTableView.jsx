@@ -39,17 +39,23 @@ const TaskTableView = ({
     }
   };
 
-  const formatDate = (dateString) => {
-    const options = { month: "short", day: "numeric" };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  };
+  const formatDate = (dateString) =>
+    new Date(dateString).toLocaleDateString(undefined, {
+      month: "short",
+      day: "numeric",
+    });
 
   const formatDateToolTip = (dateString) => {
     const date = new Date(dateString);
-    const options = { day: "2-digit", month: "short", year: "numeric" };
-    const timeOptions = { hour: "2-digit", minute: "2-digit" };
-    const formattedDate = date.toLocaleDateString(undefined, options);
-    const formattedTime = date.toLocaleTimeString(undefined, timeOptions);
+    const formattedDate = date.toLocaleDateString(undefined, {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+    const formattedTime = date.toLocaleTimeString(undefined, {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
     return `${formattedDate} at ${formattedTime}`;
   };
 

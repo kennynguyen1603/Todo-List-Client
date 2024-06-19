@@ -7,8 +7,8 @@ import { FiLoader } from "react-icons/fi";
 import { getTaskById } from "../server/todo";
 import { AiOutlineTable } from "react-icons/ai";
 import { PiListLight } from "react-icons/pi";
-import TaskTableView from "../components/TaskList/TaskTableView";
-import TaskListView from "../components/TaskList/TaskListView";
+import TaskTableView from "../components/TaskLists/TaskTableView";
+import TaskListView from "../components/TaskLists/TaskListView";
 import "../styles/viewlist/viewlist.css";
 const TaskLists = () => {
   const { taskLists, setTaskLists, tasksUser } = useContext(AuthContext);
@@ -19,7 +19,7 @@ const TaskLists = () => {
   const navigate = useNavigate();
 
   // Ref để lưu trữ dữ liệu trước đó của tasksUser
-  const prevTasksUserRef = useRef();
+  const prevTasksUserRef = useRef(tasksUser);
 
   const handleTaskListClick = (id) => navigate(`/Tasklist/${id}`);
 
@@ -133,9 +133,10 @@ const TaskLists = () => {
             taskLists={taskLists}
             handleTaskListClick={handleTaskListClick}
             handleChange={handleChange}
+            setIsAddTaskList={setIsAddTaskList}
           />
         ) : (
-          <div className="grid grid-cols-1 gap-4 overflow-auto max-h-[80vh] scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+          <div className="grid grid-cols-1 gap-4 custom-scrollbar max-h-[80vh]">
             {taskLists.map((taskList) => (
               <div key={taskList._id} className="relative mt-5">
                 <TaskListView
