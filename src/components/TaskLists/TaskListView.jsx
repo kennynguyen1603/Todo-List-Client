@@ -191,15 +191,6 @@ const TaskListView = ({ id, taskList }) => {
           taskList.color === "#FFFFFF" ? "" : `4px solid ${taskList.color}`,
       }}
     >
-      {/* <div
-        className={`w-1 h-full`}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          backgroundColor: `${taskList.color}`,
-        }}
-      ></div> */}
       <div className="mb-4 h-10 flex justify-center">
         {selectedTasks.length > 0 ? (
           <Navigation
@@ -227,13 +218,15 @@ const TaskListView = ({ id, taskList }) => {
                   className="mb-4 flex-grow text-sm font-medium uppercase mt-2"
                 >
                   <div
-                    className={`flex items-center justify-center gap-2 bg-${
-                      status === "Completed"
-                        ? "[#1F7A1F]"
-                        : status === "In Progress"
-                        ? "[#0B6BBB]"
-                        : "[#636B74]"
-                    } text-white w-[130px] p-1 rounded-md mb-2`}
+                    className="flex items-center justify-center gap-2 text-white w-[130px] p-1 rounded-md mb-2"
+                    style={{
+                      backgroundColor:
+                        status === "Completed"
+                          ? "#1F7A1F"
+                          : status === "In Progress"
+                          ? "#0B6BBB"
+                          : "#636B74",
+                    }}
                   >
                     {getStatusIcon(status)}
                     {status}

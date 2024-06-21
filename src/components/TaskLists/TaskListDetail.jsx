@@ -167,7 +167,7 @@ const TaskListDetail = () => {
 
   return (
     <div className="container mx-auto p-2">
-      <div className="mb-4 h-10 flex justify-center relative">
+      <div className="mb-2 h-10 flex justify-center relative">
         <Navigation
           onBulkAction={handleBulkAction}
           onRemoveFromList={handleRemoveFromList}
@@ -196,18 +196,20 @@ const TaskListDetail = () => {
                   className="mb-4 flex-grow text-sm font-medium uppercase mt-2"
                 >
                   <div
-                    className={`flex items-center justify-center gap-2 bg-${
-                      status === "Completed"
-                        ? "[#1F7A1F]"
-                        : status === "In Progress"
-                        ? "[#0B6BBB]"
-                        : "[#636B74]"
-                    } text-white w-[130px] p-1 rounded-md mb-2`}
+                    className="flex items-center justify-center gap-2 text-white w-[130px] p-1 rounded-md mb-2"
+                    style={{
+                      backgroundColor:
+                        status === "Completed"
+                          ? "#1F7A1F"
+                          : status === "In Progress"
+                          ? "#0B6BBB"
+                          : "#636B74",
+                    }}
                   >
                     {getStatusIcon(status)}
                     {status}
                   </div>
-
+                  {/* <div> {status} </div> */}
                   <table className="min-w-full bg-white table-auto mb-2">
                     <thead>
                       <tr className="border-b">

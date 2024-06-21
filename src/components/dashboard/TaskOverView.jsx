@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback } from "react";
 import { IoMdSearch } from "react-icons/io";
 import { AuthContext } from "../../context/AuthContext";
 import {
@@ -9,6 +9,7 @@ import {
   getTasksLater,
 } from "../../server/todo";
 import TaskList from "./TaskList";
+import { debounce } from "lodash";
 
 const TaskOverView = () => {
   const [active, setActive] = useState("Recently"); // Recently, Today, Upcoming, Later
@@ -89,6 +90,30 @@ const TaskOverView = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  // const debouncedSearch = useCallback(
+  //   debounce((value) => setSearch(value), 300),
+  //   []
+  // );
+
+  // const debouncedFilterChange = useCallback(
+  //   debounce((name, value) => {
+  //     setFilters((prevFilters) => ({
+  //       ...prevFilters,
+  //       [name]: value,
+  //     }));
+  //   }, 300),
+  //   []
+  // );
+
+  // const handleSearchChange = (e) => {
+  //   debouncedSearch(e.target.value);
+  // };
+
+  // const handleFilterChange = (e) => {
+  //   const { name, value } = e.target;
+  //   debouncedFilterChange(name, value);
+  // };
 
   return (
     <div className="taskOverview">
