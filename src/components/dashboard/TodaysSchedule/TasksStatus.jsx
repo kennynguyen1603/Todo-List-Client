@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "@context/AuthContext";
 const TasksStatus = () => {
   const { tasksUser } = useContext(AuthContext) || {};
 

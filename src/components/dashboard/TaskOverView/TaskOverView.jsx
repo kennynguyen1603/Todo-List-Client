@@ -1,15 +1,15 @@
-import { useState, useEffect, useContext, useCallback } from "react";
+import { useState, useEffect, useContext } from "react";
 import { IoMdSearch } from "react-icons/io";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../../context/AuthContext";
 import {
   getTasks,
   getTasksToday,
   getTasksRecently,
   getTasksUpcoming,
   getTasksLater,
-} from "../../server/todo";
-import TaskList from "./TaskList";
-import { debounce } from "lodash";
+} from "../../../server/todo";
+import TaskList from "../TasksList/TaskList";
+// import { debounce } from "lodash";
 
 const TaskOverView = () => {
   const [active, setActive] = useState("Recently"); // Recently, Today, Upcoming, Later

@@ -7,8 +7,8 @@ import { FiLoader } from "react-icons/fi";
 import { getTaskById } from "../server/todo";
 import { AiOutlineTable } from "react-icons/ai";
 import { PiListLight } from "react-icons/pi";
-import TaskTableView from "../components/TaskLists/TaskTableView";
-import TaskListView from "../components/TaskLists/TaskListView";
+import TaskTableView from "../components/tasklists/TaskTableView";
+import TaskListView from "../components/tasklists/TaskListView";
 import "../styles/viewlist/viewlist.css";
 const TaskLists = () => {
   const { taskLists, setTaskLists, tasksUser } = useContext(AuthContext);

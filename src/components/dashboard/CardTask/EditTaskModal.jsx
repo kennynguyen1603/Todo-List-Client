@@ -13,11 +13,10 @@ import {
   FormControl,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import { updateTaskById } from "../../server/todo";
-import { getUserById } from "../../server/user";
+import { getUserById } from "@server/user";
 import DeleteIcon from "@mui/icons-material/Delete";
-import api from "../../config/axios";
-import { updateTeam } from "../../server/team";
+import api from "@config/axios";
+import { updateTeam } from "@server/team";
 
 const EditTaskModal = ({ task, initialMembers, onSave, onCancel }) => {
   const [formData, setFormData] = useState({

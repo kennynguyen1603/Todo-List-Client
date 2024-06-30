@@ -1,13 +1,13 @@
 import { useState, useEffect, useContext, useCallback } from "react";
-import { AuthContext } from "../../context/AuthContext";
-import ButtonAddTodo from "./ButtonAddTodo";
+import { AuthContext } from "@context/AuthContext";
+import ButtonAddTodo from "../../common/ButtonAddTodo";
 import TasksStatus from "./TasksStatus";
 import TimeTracker from "./TimeTracker";
 import Calendar from "./Calendar";
-import { getTasksByDate } from "../../server/todo";
-import TaskList from "./TaskList";
+import { getTasksByDate } from "../../../server/todo";
+import TaskList from "../TasksList/TaskList";
 import Header from "./Header";
-import "../../styles/cardTask.css";
+import "@styles/cardTask.css";
 
 const TodaysSchedule = () => {
   const [trackingTime, setTrackingTime] = useState(0);

@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 // import FormAddTask from "./FormAddTask";
-import NewFormAddTask from "./NewFormAddTask";
+import NewFormAddTask from "@components/dashboard/Forms/NewFormAddTask";
 
 const style = {
   position: "absolute",

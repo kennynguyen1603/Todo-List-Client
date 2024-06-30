@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { Badge, Calendar } from "antd";
-import { AuthContext } from "../context/AuthContext";
-import ButtonAddTodo from "../components/dashboard/ButtonAddTodo";
-import "../styles/calendar/customCalendar.css";
+import { AuthContext } from "@context/AuthContext";
+import ButtonAddTodo from "@components/common/ButtonAddTodo";
+import "@styles/calendar/customCalendar.css";
 
 const CustomCalendar = () => {
   const { tasksUser } = useContext(AuthContext) || {};

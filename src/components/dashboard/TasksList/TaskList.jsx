@@ -1,8 +1,8 @@
 // import PropTypes from "prop-types";
 import { useRef, useEffect, useContext } from "react";
-import CartTodo from "./CartTodo";
+import CartTodo from "../CardTask/CartTodo";
 import PropTypes from "prop-types";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "@context/AuthContext";
 const TaskList = ({ taskList }) => {
   const listRef = useRef(null);
   const { setTasksUser } = useContext(AuthContext);

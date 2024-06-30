@@ -1,23 +1,23 @@
+import { useEffect, useState, useCallback } from "react";
 import { Progress, Tag } from "antd";
 import { format, parseISO } from "date-fns";
 import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import PropTypes from "prop-types";
 import Tooltip from "@mui/material/Tooltip";
-import { getUserById } from "../../server/user";
-import { useEffect, useState, useCallback } from "react";
+import { getUserById } from "../../../server/user";
 import ItemTaskMenu from "./ItemTaskMenu";
 import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "@context/AuthContext";
 import EditTaskModal from "./EditTaskModal";
 import {
   deleteTaskById,
   getMemberByTaskId,
   updateTaskById,
-} from "../../server/todo";
+} from "../../../server/todo";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import api from "../../config/axios";
+import api from "../../../config/axios";
 const style = {
   position: "absolute",
   top: "50%",

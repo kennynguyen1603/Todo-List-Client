@@ -215,7 +215,7 @@ const AuthProvider = ({ children }) => {
           <CircularProgress />
         </div>
       )}
-      {error && <Alert severity="error">{error}</Alert>}
+      {/* {error && <Alert severity="error">{error}</Alert>} */}
       {loginSuccess && (
         <Alert
           message="Login success"

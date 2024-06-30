@@ -15,11 +15,11 @@ import {
   FormControl,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import api from "../../config/axios";
-import { createTask } from "../../server/todo";
-import { createTeam, updateTeam } from "../../server/team";
-import { addTeamToUser } from "../../server/user";
-import { AuthContext } from "../../context/AuthContext";
+import api from "../../../config/axios";
+import { createTask } from "../../../server/todo";
+import { createTeam, updateTeam } from "../../../server/team";
+import { addTeamToUser } from "../../../server/user";
+import { AuthContext } from "../../../context/AuthContext";
 import { debounce } from "lodash";
 
 const FormAddTask = () => {
