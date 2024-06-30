@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
 import { AuthContext } from "@context/AuthContext";
+import CircularProgressBar from "@components/UI/CircularProgressBar";
+
 const TasksStatus = () => {
   const { tasksUser } = useContext(AuthContext) || {};
 
@@ -55,26 +55,23 @@ const TasksStatus = () => {
     <div className="taskStatus my-2">
       <p className="text-xl font-semibold my-4">Tasks Status</p>
       <div className="flex justify-between mb-4">
-        <div className="flex justify-start statusBars">
+        <div className="flex flex-wrap justify-around">
           {taskData.map((item, index) => (
             <div
               key={index}
               className="flex flex-col items-center w-full"
-              style={{ width: 120, height: 100 }}
+              style={{ width: 100, height: 100 }}
             >
-              <CircularProgressbar
-                value={item.value}
-                text={`${item.value}%`}
-                styles={buildStyles({
-                  textColor: "black",
-                  pathColor: item.color,
-                  trailColor: "#ddd",
-                  textSize: "1.5rem",
-                })}
-              />
-              <div className="statusLabel">
+              <CircularProgressBar
+                percentage={item.value}
+                color={item.color}
+                size={50}
+              >
+                {`${item.value}%`}
+              </CircularProgressBar>
+              <div className="flex items-center mt-2 text-sm">
                 <span
-                  className="statusDot"
+                  className="h-2 w-2 rounded-full inline-block mr-2"
                   style={{ backgroundColor: item.color }}
                 ></span>
                 {item.label}

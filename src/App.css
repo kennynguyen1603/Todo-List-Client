@@ -138,7 +138,14 @@ body .main .wrapper .main-content .dashboard .taskOverview {
   width: 100%;
   height: 100%;
 }
-body .main .wrapper .main-content .dashboard .taskOverview .taskSummary .searchBar {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .taskOverview
+  .taskSummary
+  .searchBar {
   width: 100%;
   padding: 0.7rem;
   display: flex;
@@ -147,68 +154,201 @@ body .main .wrapper .main-content .dashboard .taskOverview .taskSummary .searchB
   border-radius: 10px;
   margin-bottom: 0.8rem;
 }
-body .main .wrapper .main-content .dashboard .taskOverview .taskSummary .searchBar:hover {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .taskOverview
+  .taskSummary
+  .searchBar:hover {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
-body .main .wrapper .main-content .dashboard .taskOverview .taskSummary .searchBar input {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .taskOverview
+  .taskSummary
+  .searchBar
+  input {
   width: 100%;
   background-color: transparent;
   margin-left: 5px;
 }
-body .main .wrapper .main-content .dashboard .taskOverview .taskSummary .searchBar input:focus {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .taskOverview
+  .taskSummary
+  .searchBar
+  input:focus {
   outline: none;
 }
-body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .tasksToggle {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .taskOverview
+  .taskDetail
+  .tasksToggle {
   display: flex;
   justify-content: space-between;
   padding-right: 1vw;
 }
-body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .tasksToggle .toggle-btn {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .taskOverview
+  .taskDetail
+  .tasksToggle
+  .toggle-btn {
   font-size: 1.1rem;
   color: #b5b5b5;
 }
-body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .tasksToggle .active-btn {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .taskOverview
+  .taskDetail
+  .tasksToggle
+  .active-btn {
   color: #fabb18;
 }
-body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .taskListOverview {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .taskOverview
+  .taskDetail
+  .taskListOverview {
   max-height: 56vh;
   height: 100%;
 }
-body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .taskListOverview .task-list {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .taskOverview
+  .taskDetail
+  .taskListOverview
+  .task-list {
   /* Tùy chỉnh thanh cuộn cho Firefox */
 }
-body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .taskListOverview .task-list.task-list::-webkit-scrollbar {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .taskOverview
+  .taskDetail
+  .taskListOverview
+  .task-list.task-list::-webkit-scrollbar {
   width: 3px;
 }
-body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .taskListOverview .task-list.task-list::-webkit-scrollbar-track {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .taskOverview
+  .taskDetail
+  .taskListOverview
+  .task-list.task-list::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 10px;
 }
-body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .taskListOverview .task-list.task-list::-webkit-scrollbar-thumb {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .taskOverview
+  .taskDetail
+  .taskListOverview
+  .task-list.task-list::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 10px;
   height: 2px;
 }
-body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .taskListOverview .task-list.task-list::-webkit-scrollbar-thumb:hover {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .taskOverview
+  .taskDetail
+  .taskListOverview
+  .task-list.task-list::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .taskListOverview .task-list.task-list {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .taskOverview
+  .taskDetail
+  .taskListOverview
+  .task-list.task-list {
   scrollbar-width: thin;
   scrollbar-color: #888 #f1f1f1;
 }
-body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .taskListOverview .task-list.task-list::-moz-scrollbar {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .taskOverview
+  .taskDetail
+  .taskListOverview
+  .task-list.task-list::-moz-scrollbar {
   width: 3px;
 }
-body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .taskListOverview .task-list.task-list::-moz-scrollbar-track {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .taskOverview
+  .taskDetail
+  .taskListOverview
+  .task-list.task-list::-moz-scrollbar-track {
   background: #f1f1f1;
   border-radius: 10px;
 }
-body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .taskListOverview .task-list.task-list::-moz-scrollbar-thumb {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .taskOverview
+  .taskDetail
+  .taskListOverview
+  .task-list.task-list::-moz-scrollbar-thumb {
   background: #888;
   border-radius: 10px;
   height: 2px;
 }
-body .main .wrapper .main-content .dashboard .taskOverview .taskDetail .taskListOverview .task-list.task-list::-moz-scrollbar-thumb:hover {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .taskOverview
+  .taskDetail
+  .taskListOverview
+  .task-list.task-list::-moz-scrollbar-thumb:hover {
   background: #555;
 }
 body .main .wrapper .main-content .dashboard .todaysSchedule {
@@ -223,22 +363,53 @@ body .main .wrapper .main-content .dashboard .todaysSchedule .header {
   align-items: center;
   margin-bottom: 20px;
 }
-body .main .wrapper .main-content .dashboard .todaysSchedule .header .inforUser {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .todaysSchedule
+  .header
+  .inforUser {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-body .main .wrapper .main-content .dashboard .todaysSchedule .header .inforUser .profile-pic {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .todaysSchedule
+  .header
+  .inforUser
+  .profile-pic {
   width: 4.5vw;
   border-radius: 50%;
   aspect-ratio: 1/1;
   object-fit: contain;
 }
-body .main .wrapper .main-content .dashboard .todaysSchedule .header .inforUser .profile-name {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .todaysSchedule
+  .header
+  .inforUser
+  .profile-name {
   font-size: 1.2rem;
   font-weight: 500;
 }
-body .main .wrapper .main-content .dashboard .todaysSchedule .header .inforUser .profile-career {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .todaysSchedule
+  .header
+  .inforUser
+  .profile-career {
   font-size: 1.25rem;
   font-weight: 500;
   color: #c4c4c4;
@@ -251,14 +422,22 @@ body .main .wrapper .main-content .dashboard .todaysSchedule .time-tracker {
   background-color: #ffffff;
   height: 10vh;
   width: 100%;
-  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
   border-radius: 20px;
   display: flex;
   justify-content: space-between;
   padding: 1rem;
   align-items: center;
 }
-body .main .wrapper .main-content .dashboard .todaysSchedule .time-tracker .play-icon {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .todaysSchedule
+  .time-tracker
+  .play-icon {
   position: relative;
   width: 50px;
   height: 50px;
@@ -266,7 +445,15 @@ body .main .wrapper .main-content .dashboard .todaysSchedule .time-tracker .play
   font-size: 1.3rem;
   border-radius: 10px;
 }
-body .main .wrapper .main-content .dashboard .todaysSchedule .time-tracker .play-icon .icon {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .todaysSchedule
+  .time-tracker
+  .play-icon
+  .icon {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -277,7 +464,14 @@ body .main .wrapper .main-content .dashboard .todaysSchedule .taskButton {
   top: -8px;
   right: 0;
 }
-body .main .wrapper .main-content .dashboard .todaysSchedule .taskButton .task-button {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .todaysSchedule
+  .taskButton
+  .task-button {
   font-size: 14px;
   padding: 5px;
   height: 2.5rem;
@@ -286,7 +480,14 @@ body .main .wrapper .main-content .dashboard .todaysSchedule .taskButton .task-b
   border-radius: 15px;
   color: #5accbb;
 }
-body .main .wrapper .main-content .dashboard .todaysSchedule .taskButton .task-button:hover {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .todaysSchedule
+  .taskButton
+  .task-button:hover {
   background-color: #5accbb;
   color: #000;
 }
@@ -295,21 +496,63 @@ body .main .wrapper .main-content .dashboard .todaysSchedule .calendar {
   flex-direction: column;
   align-items: center;
 }
-body .main .wrapper .main-content .dashboard .todaysSchedule .calendar .week-names,
-body .main .wrapper .main-content .dashboard .todaysSchedule .calendar .week-dates,
-body .main .wrapper .main-content .dashboard .todaysSchedule .calendar .next-week-dates {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .todaysSchedule
+  .calendar
+  .week-names,
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .todaysSchedule
+  .calendar
+  .week-dates,
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .todaysSchedule
+  .calendar
+  .next-week-dates {
   display: flex;
   justify-content: space-around;
   width: 100%;
   position: relative;
 }
-body .main .wrapper .main-content .dashboard .todaysSchedule .calendar .day-name,
-body .main .wrapper .main-content .dashboard .todaysSchedule .calendar .day-date {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .todaysSchedule
+  .calendar
+  .day-name,
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .todaysSchedule
+  .calendar
+  .day-date {
   flex: 0.1;
   text-align: center;
   padding: 4px;
 }
-body .main .wrapper .main-content .dashboard .todaysSchedule .calendar .day-date.selected {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .todaysSchedule
+  .calendar
+  .day-date.selected {
   background-color: #fabb18;
   color: #fff;
   border-radius: 50%;
@@ -318,7 +561,14 @@ body .main .wrapper .main-content .dashboard .todaysSchedule .calendar .day-date
 body .main .wrapper .main-content .dashboard .todaysSchedule .calendar .active {
   color: #fabb18;
 }
-body .main .wrapper .main-content .dashboard .todaysSchedule .calendar .active::after {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .todaysSchedule
+  .calendar
+  .active::after {
   content: "";
   display: block;
   width: 5px;
@@ -332,19 +582,56 @@ body .main .wrapper .main-content .dashboard .todaysSchedule .taskByDate {
   max-height: 30.5vh;
   position: relative;
 }
-body .main .wrapper .main-content .dashboard .todaysSchedule .taskByDate .task-list .list .task-item {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .todaysSchedule
+  .taskByDate
+  .task-list
+  .list
+  .task-item {
   opacity: 0;
   transform: translateY(50px);
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out, border-color 0.3s ease-in-out;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out,
+    border-color 0.3s ease-in-out;
 }
-body .main .wrapper .main-content .dashboard .todaysSchedule .taskByDate .task-list .list .task-item.visible {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .todaysSchedule
+  .taskByDate
+  .task-list
+  .list
+  .task-item.visible {
   opacity: 1;
   transform: translateY(0);
 }
-body .main .wrapper .main-content .dashboard .todaysSchedule .taskByDate .task-list .list .task-item.visible::before {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .todaysSchedule
+  .taskByDate
+  .task-list
+  .list
+  .task-item.visible::before {
   border-color: #fff;
 }
-body .main .wrapper .main-content .dashboard .todaysSchedule .taskByDate .task-list .list .task-item::after {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .todaysSchedule
+  .taskByDate
+  .task-list
+  .list
+  .task-item::after {
   content: "";
   position: absolute;
   top: -2px;
@@ -354,7 +641,16 @@ body .main .wrapper .main-content .dashboard .todaysSchedule .taskByDate .task-l
   background-color: #ffcc00;
   z-index: 0;
 }
-body .main .wrapper .main-content .dashboard .todaysSchedule .taskByDate .task-list .list .task-item::before {
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .todaysSchedule
+  .taskByDate
+  .task-list
+  .list
+  .task-item::before {
   content: "";
   position: absolute;
   top: -15px;
@@ -366,24 +662,30 @@ body .main .wrapper .main-content .dashboard .todaysSchedule .taskByDate .task-l
   border-radius: 50%;
   z-index: 1;
 }
-body .main .wrapper .main-content .dashboard .todaysSchedule .taskStatus .statusBars {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
-body .main .wrapper .main-content .dashboard .todaysSchedule .taskStatus .statusBars .statusLabel {
+
+/* body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .todaysSchedule
+  .taskStatus
+  .statusBars
+  .statusLabel {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 10px;
-}
-body .main .wrapper .main-content .dashboard .todaysSchedule .taskStatus .statusBars .statusLabel .statusDot {
-  height: 9px;
-  width: 9px;
-  border-radius: 50%;
-  margin-right: 5px;
-}
-body .main .wrapper .main-content .dashboard .todaysSchedule .taskStatus .processBox {
+} */
+
+body
+  .main
+  .wrapper
+  .main-content
+  .dashboard
+  .todaysSchedule
+  .taskStatus
+  .processBox {
   height: 40px;
   padding: 5px;
   font: 14px sans-serif;
