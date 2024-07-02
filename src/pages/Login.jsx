@@ -1,13 +1,11 @@
-// import { saveInfoToLocalStorage } from "@/utils/product";
-// import { Helmet } from "react-helmet";
+import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/auth.css";
 import { Field, Form, Formik, useField } from "formik";
 import * as Yup from "yup";
 import { FcGoogle } from "react-icons/fc";
-import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import Prototype from "prop-types";
+import PropTypes from "prop-types";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().min(6, "Too Short!").required("Username is required"),
@@ -27,7 +25,7 @@ const CustomErrorMessage = ({ name }) => {
 };
 
 CustomErrorMessage.propTypes = {
-  name: Prototype.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 const GoogleSignIn = () => {
@@ -54,6 +52,18 @@ const GoogleSignIn = () => {
 
 const Login = () => {
   const { login } = useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const initialValues = {
+    username: "",
+    password: "",
+    rememberMe: false,
+  };
+
   const handleSubmitLogin = async (values, { setSubmitting }) => {
     try {
       await login(values.username, values.password);
@@ -68,10 +78,13 @@ const Login = () => {
   return (
     <div className="auth-option">
       <div className="logo">
-        <img src="https://res.cloudinary.com/dlotuochc/image/upload/v1715889504/pt6vw2wuoayghks1n15z.png" />
+        <img
+          src="https://res.cloudinary.com/dlotuochc/image/upload/v1715889504/pt6vw2wuoayghks1n15z.png"
+          alt="Logo"
+        />
       </div>
       <Formik
-        initialValues={{ username: "", password: "", rememberMe: false }}
+        initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmitLogin}
       >
@@ -82,8 +95,20 @@ const Login = () => {
             <CustomErrorMessage name="username" />
           </div>
           <div className="inputField">
-            <Field name="password" type="password" className="input" required />
+            <Field
+              name="password"
+              type={showPassword ? "text" : "password"}
+              className="input"
+              required
+            />
             <label className="label">Password</label>
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute inset-y-0 right-0 px-3 py-2"
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
             <CustomErrorMessage name="password" />
           </div>
           <div className="relative">
@@ -102,4 +127,5 @@ const Login = () => {
     </div>
   );
 };
+
 export default Login;

@@ -51,24 +51,33 @@ const TasksStatus = () => {
 
   const taskData = calculateTaskStatus(tasksUser || []);
 
+  const TaskItem = ({ label, quantity, color }) => (
+    <div
+      className="p-2 2xl:h-10 2xl:text-sm h-9 text-xs mr-2 rounded-lg flex justify-center items-center"
+      style={{ backgroundColor: color }}
+    >
+      <div>
+        {label}: <span>{quantity}</span>
+      </div>
+    </div>
+  );
+
   return (
     <div className="taskStatus my-2">
       <p className="text-xl font-semibold my-4">Tasks Status</p>
       <div className="flex justify-between mb-4">
-        <div className="flex flex-wrap justify-around">
+        <div className="flex flex-wrap justify-center gap-5 ml-2">
           {taskData.map((item, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center w-full"
-              style={{ width: 100, height: 100 }}
-            >
+            <div key={index} className="flex flex-col items-center">
               <CircularProgressBar
                 percentage={item.value}
                 color={item.color}
-                size={50}
+                size={60}
+                trokeWidth={5}
               >
                 {`${item.value}%`}
               </CircularProgressBar>
+
               <div className="flex items-center mt-2 text-sm">
                 <span
                   className="h-2 w-2 rounded-full inline-block mr-2"
@@ -81,17 +90,14 @@ const TasksStatus = () => {
         </div>
         <div className="grid grid-cols-2 gap-2">
           {taskData.map((item, index) => (
-            <div
+            <TaskItem
               key={index}
-              className="processBox"
-              style={{ backgroundColor: item.color }}
-            >
-              <div>
-                {item.label}: <span>{item.quantity}</span>
-              </div>
-            </div>
+              label={item.label}
+              quantity={item.quantity}
+              color={item.color}
+            />
           ))}
-          <div className="processBox">Total: {tasksUser.length}</div>
+          <TaskItem label="Total" quantity={tasksUser.length} color="#F06292" />
         </div>
       </div>
     </div>
