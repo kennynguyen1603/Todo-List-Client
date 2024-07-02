@@ -3,10 +3,10 @@ import { NavLink } from "react-router-dom";
 import "../styles/auth.css";
 import { Field, Form, Formik, useField } from "formik";
 import * as Yup from "yup";
-import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../context/AuthContext";
 import PropTypes from "prop-types";
-
+import { BiHide, BiShow } from "react-icons/bi";
+import GoogleSignIn from "@components/login/GoogleSignIn";
 const validationSchema = Yup.object().shape({
   username: Yup.string().min(6, "Too Short!").required("Username is required"),
   password: Yup.string().min(6, "Too Short!").required("Password is required"),
@@ -26,28 +26,6 @@ const CustomErrorMessage = ({ name }) => {
 
 CustomErrorMessage.propTypes = {
   name: PropTypes.string.isRequired,
-};
-
-const GoogleSignIn = () => {
-  return (
-    <div className="authSection">
-      <div className="separator">
-        <hr className="line" />
-        <span className="or">or</span>
-        <hr className="line" />
-      </div>
-      <button className="googleSignIn">
-        <FcGoogle className="googleIcon" />
-        Sign in with Google
-      </button>
-      <div className="signUp">
-        Are you new?{" "}
-        <NavLink to="/auth/register" className="signUpLink">
-          Create an Account
-        </NavLink>
-      </div>
-    </div>
-  );
 };
 
 const Login = () => {
@@ -105,9 +83,9 @@ const Login = () => {
             <button
               type="button"
               onClick={togglePasswordVisibility}
-              className="absolute inset-y-0 right-0 px-3 py-2"
+              className="absolute top-[25%] right-2"
             >
-              {showPassword ? "Hide" : "Show"}
+              {showPassword ? <BiHide /> : <BiShow />}
             </button>
             <CustomErrorMessage name="password" />
           </div>

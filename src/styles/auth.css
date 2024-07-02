@@ -8,9 +8,7 @@
 }
 .auth .auth-content {
   width: 85%;
-  height: 80vh;
   display: grid;
-  align-items: center;
   grid-template-columns: 1fr 0.7fr;
   border-radius: 10px;
 }
@@ -46,7 +44,7 @@
 }
 .auth .auth-content .auth-right .auth-option .logo img {
   width: 100%;
-  height: 200px;
+  height: 190px;
   object-fit: contain;
 }
 .auth .auth-content .auth-right .auth-option .formContainer {
@@ -80,6 +78,7 @@
   flex-direction: column;
   position: relative;
   margin-bottom: 5px;
+  position: relative;
 }
 .auth .auth-content .auth-right .auth-option .formContainer .inputField .input {
   width: 100%;
