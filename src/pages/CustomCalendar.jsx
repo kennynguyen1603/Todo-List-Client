@@ -1,14 +1,19 @@
-import { useContext } from "react";
-import { Badge, Calendar } from "antd";
-import { AuthContext } from "@context/AuthContext";
+import { useState, useContext } from "react";
+import { getMonthDays, getWeekDays } from "@utils/calendar";
+import { AuthContext } from "../context/AuthContext";
 import ButtonAddTodo from "@components/common/ButtonAddTodo";
-import "@styles/calendar/customCalendar.css";
 
 const CustomCalendar = () => {
   const { tasksUser } = useContext(AuthContext) || {};
+  const [currentDate, setCurrentDate] = useState(new Date());
 
-  const getListData = (value) => {
-    const dateStr = value.format("YYYY-MM-DD");
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+  const monthDays = getMonthDays(year, month);
+  const weekDays = getWeekDays();
+
+  const getListData = (date) => {
+    const dateStr = date.toISOString().split("T")[0];
     return tasksUser
       .filter((task) => task.due_date.startsWith(dateStr))
       .map((task) => {
@@ -22,46 +27,76 @@ const CustomCalendar = () => {
       });
   };
 
-  const dateCellRender = (value) => {
-    const listData = getListData(value);
-    return (
-      <ul className="">
-        {listData.map((item, index) => (
-          <li key={index}>
-            <Badge status={item.type} text={item.content} />
-          </li>
-        ))}
-      </ul>
-    );
+  const renderCells = () => {
+    return monthDays.map((day) => {
+      const listData = getListData(day);
+      return (
+        <div
+          key={day}
+          className={`border p-2 ${
+            day.getMonth() !== month ? "bg-gray-200" : ""
+          }`}
+        >
+          <div className="text-right">{day.getDate()}</div>
+          <ul className="list-none p-0 m-0">
+            {listData.map((item, index) => (
+              <li key={index} className="flex items-center">
+                <span
+                  className={`inline-block w-2 h-2 rounded-full ${
+                    item.type === "success"
+                      ? "bg-green-500"
+                      : item.type === "warning"
+                      ? "bg-yellow-500"
+                      : "bg-red-500"
+                  }`}
+                />
+                <span className="ml-2">{item.content}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    });
   };
 
-  const monthCellRender = (value) => {
-    const month = value.month();
-    const num = tasksUser.filter(
-      (task) => new Date(task.due_date).getMonth() === month
-    ).length;
-    return num ? (
-      <div className="notes-month">
-        <section>{num}</section>
-        <span>Tasks this month</span>
-      </div>
-    ) : null;
+  const nextMonth = () => {
+    setCurrentDate(new Date(year, month + 1, 1));
   };
-  const cellRender = (current, info) => {
-    if (info.type === "date") return dateCellRender(current);
-    if (info.type === "month") return monthCellRender(current);
-    return info.originNode;
+
+  const prevMonth = () => {
+    setCurrentDate(new Date(year, month - 1, 1));
   };
 
   return (
-    <div className="relative">
-      <div className="absolute top-2 left-0 hover:bg-[#e6f4ff] font-bold text-xl">
+    <div className="w-full max-w-4xl mx-auto p-4">
+      <div className="flex justify-between items-center mb-4">
+        <button
+          onClick={prevMonth}
+          className="text-gray-600 hover:text-gray-800"
+        >
+          &lt;
+        </button>
+        <span className="text-lg font-bold">
+          {currentDate.toLocaleString("default", { month: "long" })} {year}
+        </span>
+        <button
+          onClick={nextMonth}
+          className="text-gray-600 hover:text-gray-800"
+        >
+          &gt;
+        </button>
+      </div>
+      <div className="grid grid-cols-7 gap-4">
+        {weekDays.map((day) => (
+          <div key={day} className="text-center font-semibold">
+            {day}
+          </div>
+        ))}
+        {renderCells()}
+      </div>
+      <div className="absolute top-2 left-0 hover:bg-blue-100 font-bold text-xl">
         <ButtonAddTodo />
       </div>
-      <Calendar
-        cellRender={cellRender}
-        className="custom-calender bg-transparent"
-      />
     </div>
   );
 };
