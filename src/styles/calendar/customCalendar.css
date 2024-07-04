@@ -1,51 +1,34 @@
-.custom-calender {
-  padding: 5px 5px 0 5px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+/* Custom scrollbar styles */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 3px; /* Width of the entire scrollbar */
 }
-.custom-calender .ant-picker-calendar-header {
-  padding: 5px;
-  margin-bottom: 10px;
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the tracking area */
 }
-.custom-calender .ant-picker-calendar-date-content {
-  scrollbar-width: thin;
-  scrollbar-color: #888 #f1f1f1;
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888; /* Background of the scrollbar thumb */
+  border-radius: 10px; /* Round the corners of the scrollbar thumb */
 }
-.custom-calender .ant-picker-calendar-date-content.ant-picker-calendar-date-content::-webkit-scrollbar {
-  width: 3px;
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Background of the scrollbar thumb on hover */
 }
-.custom-calender .ant-picker-calendar-date-content.ant-picker-calendar-date-content::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
+
+.custom-scrollbar::-moz-scrollbar {
+  width: 3px; /* Width of the entire scrollbar */
 }
-.custom-calender .ant-picker-calendar-date-content.ant-picker-calendar-date-content::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 10px;
-  height: 2px;
+
+.custom-scrollbar::-moz-scrollbar-track {
+  background: #f1f1f1; /* Color of the tracking area */
 }
-.custom-calender .ant-picker-calendar-date-content.ant-picker-calendar-date-content::-webkit-scrollbar-thumb:hover {
-  background: #555;
+
+.custom-scrollbar::-moz-scrollbar-thumb {
+  background: #888; /* Background of the scrollbar thumb */
+  border-radius: 10px; /* Round the corners of the scrollbar thumb */
 }
-.custom-calender .ant-picker-calendar-date-content.ant-picker-calendar-date-content::-moz-scrollbar {
-  width: 3px;
-}
-.custom-calender .ant-picker-calendar-date-content.ant-picker-calendar-date-content::-moz-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
-.custom-calender .ant-picker-calendar-date-content.ant-picker-calendar-date-content::-moz-scrollbar-thumb {
-  background: #888;
-  border-radius: 10px;
-  height: 2px;
-}
-.custom-calender .ant-picker-calendar-date-content.ant-picker-calendar-date-content::-moz-scrollbar-thumb:hover {
-  background: #555;
-}
-.custom-calender .ant-picker-body {
-  padding: 0;
-}
-.custom-calender .ant-picker-panel {
-  border-radius: 20px;
+
+.custom-calendar::-webkit-scrollbar {
+  width: 8px;
 }

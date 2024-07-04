@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { getMonthDays, getWeekDays } from "@utils/calendar";
 import { AuthContext } from "../context/AuthContext";
 import ButtonAddTodo from "@components/common/ButtonAddTodo";
-
+import "@styles/calendar/customCalendar.css";
 const CustomCalendar = () => {
   const { tasksUser } = useContext(AuthContext) || {};
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -44,9 +44,9 @@ const CustomCalendar = () => {
           onMouseLeave={() => setHoveredDate(null)}
         >
           <div className="text-right">{day.getDate()}</div>
-          <ul className="list-none max-h-24 overflow-y-auto">
+          <ul className="list-none max-h-24 overflow-y-auto custom-scrollbar">
             {listData.map((item, index) => (
-              <li key={index} className="flex items-center">
+              <li key={index} className="flex items-center mt-2">
                 <span
                   className={`w-2 h-2 rounded-full flex-shrink-0 ${
                     item.type === "success"
@@ -79,7 +79,7 @@ const CustomCalendar = () => {
   };
 
   return (
-    <div className="w-full h-full mx-auto py-4 px-2 overflow-y-auto md:overflow-y-scroll">
+    <div className="w-full h-full mx-auto py-4 px-2 overflow-y-auto md:overflow-y-scroll custom-calendar">
       <div className="flex justify-between items-center mb-4">
         <button
           onClick={prevMonth}
