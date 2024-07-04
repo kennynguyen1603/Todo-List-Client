@@ -1,8 +1,7 @@
 import { useState } from "react";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-// import FormAddTask from "./FormAddTask";
 import NewFormAddTask from "@components/dashboard/Forms/NewFormAddTask";
 
 const style = {
@@ -16,15 +15,18 @@ const style = {
   p: 4,
 };
 
-const ButtonAddTodo = () => {
+const ButtonAddTodo = ({ fontsize = "text-base" }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
-    <div className="taskButton">
-      <Button onClick={handleOpen} className="task-button">
+    <div>
+      <button
+        onClick={handleOpen}
+        className={`${fontsize} p-2 font-semibold rounded-lg text-[#5accbb] hover:bg-[#5accbb] hover:text-white capitalize`}
+      >
         + add task
-      </Button>
+      </button>
       <Modal
         open={open}
         onClose={handleClose}

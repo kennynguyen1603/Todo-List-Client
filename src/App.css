@@ -459,38 +459,7 @@ body
   left: 50%;
   transform: translate(-50%, -50%);
 }
-body .main .wrapper .main-content .dashboard .todaysSchedule .taskButton {
-  position: absolute;
-  top: -8px;
-  right: 0;
-}
-body
-  .main
-  .wrapper
-  .main-content
-  .dashboard
-  .todaysSchedule
-  .taskButton
-  .task-button {
-  font-size: 14px;
-  padding: 5px;
-  height: 2.5rem;
-  width: 110px;
-  font-weight: 600;
-  border-radius: 15px;
-  color: #5accbb;
-}
-body
-  .main
-  .wrapper
-  .main-content
-  .dashboard
-  .todaysSchedule
-  .taskButton
-  .task-button:hover {
-  background-color: #5accbb;
-  color: #000;
-}
+
 body .main .wrapper .main-content .dashboard .todaysSchedule .calendar {
   display: flex;
   flex-direction: column;

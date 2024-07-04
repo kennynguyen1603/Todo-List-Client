@@ -59,7 +59,9 @@ const TodaysSchedule = () => {
       />
       <div className="relative mt-5 mb-6">
         <TasksStatus />
-        <ButtonAddTodo />
+        <div className="absolute  top-[-5px] right-0">
+          <ButtonAddTodo />
+        </div>
       </div>
       <Calendar onDateSelect={handleDateSelect} taskDates={tasksDates} />
       <div className="taskByDate">
