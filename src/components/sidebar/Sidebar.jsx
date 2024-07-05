@@ -64,8 +64,8 @@ const Sidebar = () => {
           logout();
         }}
       >
-        <IoLogOutOutline className="ml-10" />
-        <p>Log Out</p>
+        <IoLogOutOutline className="ml-[2vw]" />
+        <p className="text-sm ">Log Out</p>
       </button>
       <div className="footer">
         <div className="footer1">

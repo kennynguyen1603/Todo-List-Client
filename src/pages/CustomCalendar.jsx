@@ -37,14 +37,13 @@ const CustomCalendar = () => {
       return (
         <div
           key={day}
-          className={`border p-2 h-40 hover:bg-slate-100 relative ${
+          className={`border-b p-2 h-36 hover:bg-slate-100 relative mr-2 ${
             day.getMonth() !== month ? "bg-gray-200" : ""
           }`}
           onMouseEnter={() => setHoveredDate(day)}
           onMouseLeave={() => setHoveredDate(null)}
         >
-          <div className="text-right">{day.getDate()}</div>
-          <ul className="list-none max-h-24 overflow-y-auto custom-scrollbar">
+          <ul className="list-none max-h-28 overflow-y-auto custom-scrollbar">
             {listData.map((item, index) => (
               <li key={index} className="flex items-center mt-2">
                 <span
@@ -56,13 +55,16 @@ const CustomCalendar = () => {
                       : "bg-red-500"
                   }`}
                 />
-                <span className="ml-2 text-sm flex-grow">{item.content}</span>
+                <span className="ml-2 text-xs flex-grow">{item.content}</span>
               </li>
             ))}
           </ul>
+          <div className="absolute bottom-0 right-1 p-1 text-sm">
+            {day.getDate()}
+          </div>
           {isHovered && (
-            <div className="absolute bottom-1 right-1">
-              <ButtonAddTodo fontsize={"text-xs"} />
+            <div className="absolute bottom-[2px] right-6">
+              <ButtonAddTodo fontsize={"text-xs"} content="+" />
             </div>
           )}
         </div>
@@ -99,7 +101,7 @@ const CustomCalendar = () => {
       </div>
       <div className="grid grid-cols-7">
         {weekDays.map((day) => (
-          <div key={day} className="text-center font-semibold">
+          <div key={day} className="text-center text-sm border-b mr-2">
             {day}
           </div>
         ))}

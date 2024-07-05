@@ -15,7 +15,7 @@ const style = {
   p: 4,
 };
 
-const ButtonAddTodo = ({ fontsize = "text-base" }) => {
+const ButtonAddTodo = ({ fontsize = "text-base", content = "+ add task" }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -23,9 +23,9 @@ const ButtonAddTodo = ({ fontsize = "text-base" }) => {
     <div>
       <button
         onClick={handleOpen}
-        className={`${fontsize} p-2 font-semibold rounded-lg text-[#5accbb] hover:bg-[#5accbb] hover:text-white capitalize`}
+        className={`${fontsize} px-2 py-1 font-semibold rounded-lg text-[#5accbb] hover:bg-[#5accbb] hover:text-white capitalize`}
       >
-        + add task
+        {content}
       </button>
       <Modal
         open={open}

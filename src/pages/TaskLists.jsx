@@ -172,7 +172,7 @@ const TaskLists = () => {
                   placeholder="List"
                   className="border border-gray-300 p-2 focus:outline-none rounded-md mb-4"
                 />
-                <div className="absolute bottom-10 right-7 flex items-center">
+                <div className="absolute bottom-5 right-6 flex items-center">
                   {isLoading && (
                     <FiLoader className="animate-spin text-blue-500 mr-4" />
                   )}
