@@ -68,7 +68,7 @@ body .main .wrapper .sidebar .side a {
 }
 body .main .wrapper .sidebar .side a .side-name,
 body .main .wrapper .sidebar .side a .side-icon {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
 }
 body .main .wrapper .sidebar .side a .side-icon {
@@ -188,42 +188,8 @@ body
   input:focus {
   outline: none;
 }
-body
-  .main
-  .wrapper
-  .main-content
-  .dashboard
-  .taskOverview
-  .taskDetail
-  .tasksToggle {
-  display: flex;
-  justify-content: space-between;
-  padding-right: 1vw;
-}
-body
-  .main
-  .wrapper
-  .main-content
-  .dashboard
-  .taskOverview
-  .taskDetail
-  .tasksToggle
-  .toggle-btn {
-  font-size: 1.1rem;
-  color: #b5b5b5;
-}
-body
-  .main
-  .wrapper
-  .main-content
-  .dashboard
-  .taskOverview
-  .taskDetail
-  .tasksToggle
-  .active-btn {
-  color: #fabb18;
-}
-body
+
+/* body
   .main
   .wrapper
   .main-content
@@ -233,18 +199,8 @@ body
   .taskListOverview {
   max-height: 56vh;
   height: 100%;
-}
-body
-  .main
-  .wrapper
-  .main-content
-  .dashboard
-  .taskOverview
-  .taskDetail
-  .taskListOverview
-  .task-list {
-  /* Tùy chỉnh thanh cuộn cho Firefox */
-}
+} */
+
 body
   .main
   .wrapper

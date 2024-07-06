@@ -187,6 +187,7 @@ const CartTodo = ({
           />
         </Tooltips>
       </div>
+
       <div className="mt-3">
         <Tooltips title={`${processValue}%`}>
           <ProgressBar processValue={processValue} />

@@ -41,7 +41,7 @@ export default {
       // => @media (min-width: 1280px) { ... }
 
       desktoplg: "1560px",
-      // => @media (min-width: 1580px) { ... }
+      // => @media (min-width: 1560px) { ... }
     },
   },
   plugins: [import("flowbite/plugin")],

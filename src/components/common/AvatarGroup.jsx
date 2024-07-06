@@ -7,8 +7,6 @@ const AvatarGroup = ({ avatars, maxVisible = 5, size = 10 }) => {
       {avatars.slice(0, maxVisible).map((avatar, index) => (
         <div
           key={index}
-          src={avatar}
-          alt="Avatar"
           className={`w-${size} h-${size} rounded-full ring-2 ring-white relative`}
           style={{
             zIndex: 10 - index,
@@ -17,7 +15,7 @@ const AvatarGroup = ({ avatars, maxVisible = 5, size = 10 }) => {
           {avatar ? (
             <img
               src={avatar}
-              alt="Avatar"
+              alt="Av"
               className="w-full h-full object-cover rounded-full"
             />
           ) : (

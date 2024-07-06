@@ -117,15 +117,17 @@ const TaskOverView = () => {
 
   return (
     <div className="taskOverview">
-      <div className="taskSummary flex flex-col gap-3">
-        <p className="text-2xl italic">Hello, {user?.username}!</p>
-        <p className="text-2xl font-semibold">
+      <div className="taskSummary flex flex-col desktoplg:gap-3 laptop:gap-2">
+        <p className="desktoplg:text-2xl laptop:text-xl italic">
+          Hello, {user?.username}!
+        </p>
+        <p className="desktoplg:text-2xl laptop:text-xl font-semibold">
           {todayTaskCount > 0
             ? `You have got ${todayTaskCount} tasks today!`
             : "You have no tasks today!"}
         </p>
-        <div className="searchBar mt-2">
-          <IoMdSearch className="text-2xl font-semibold ml-1" />
+        <div className="searchBar mt-1">
+          <IoMdSearch className="desktoplg:text-2xl laptop:text-xl font-semibold ml-1" />
           <input
             type="text"
             value={search}
@@ -135,38 +137,44 @@ const TaskOverView = () => {
         </div>
       </div>
       <div className="taskDetail">
-        <p className="text-2xl font-semibold mb-2">My Tasks</p>
-        <div className="tasksToggle">
+        <p className="desktoplg:text-2xl laptop:text-xl font-semibold mb-2">
+          My Tasks
+        </p>
+        <div className="flex justify-between">
           <button
-            className={`toggle-btn ${
-              active === "Recently" ? "active-btn" : ""
+            className={`text-[#b5b5b5] ${
+              active === "Recently" ? "text-[#fabb18]" : ""
             }`}
             onClick={() => handleToggle("Recently")}
           >
             Recently
           </button>
           <button
-            className={`toggle-btn ${active === "Today" ? "active-btn" : ""}`}
+            className={`text-[#b5b5b5] ${
+              active === "Today" ? "text-[#fabb18]" : ""
+            }`}
             onClick={() => handleToggle("Today")}
           >
             Today
           </button>
           <button
-            className={`toggle-btn ${
-              active === "Upcoming" ? "active-btn" : ""
+            className={`text-[#b5b5b5] ${
+              active === "Upcoming" ? "text-[#fabb18]" : ""
             }`}
             onClick={() => handleToggle("Upcoming")}
           >
             Upcoming
           </button>
           <button
-            className={`toggle-btn ${active === "Later" ? "active-btn" : ""}`}
+            className={`text-[#b5b5b5] ${
+              active === "Later" ? "text-[#fabb18]" : ""
+            }`}
             onClick={() => handleToggle("Later")}
           >
             Later
           </button>
         </div>
-        <div className="filters flex flex-wrap justify-evenly mt-2">
+        <div className="filters flex flex-wrap justify-evenly desktoplg:mt-2 laptop:mt-1">
           <select
             name="status"
             value={filters.status}
@@ -195,7 +203,7 @@ const TaskOverView = () => {
             onChange={handleFilterChange}
           />
         </div>
-        <div className="taskListOverview">
+        <div className="h-full laptop:max-h-[53vh] desktoplg:max-h-[56vh]">
           <TaskList taskList={filteredTasksUser} />
         </div>
       </div>
