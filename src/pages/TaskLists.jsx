@@ -101,7 +101,7 @@ const TaskLists = () => {
   }, [tasksUser, fetchCompletedTasks]);
 
   return (
-    <div className="container mx-auto p-1 py-4">
+    <div className="container mx-auto px-2 py-4">
       <div className="relative">
         <div className="flex items-center gap-10">
           <h1 className="text-xl font-bold mb-4">Lists</h1>

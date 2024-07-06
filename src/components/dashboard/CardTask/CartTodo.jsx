@@ -1,23 +1,23 @@
-import { useEffect, useState, useCallback } from "react";
-import { Progress, Tag } from "antd";
-import { format, parseISO } from "date-fns";
-import Avatar from "@mui/material/Avatar";
-import AvatarGroup from "@mui/material/AvatarGroup";
 import PropTypes from "prop-types";
-import Tooltip from "@mui/material/Tooltip";
-import { getUserById } from "../../../server/user";
+import { useEffect, useState, useCallback, useContext } from "react";
+import { Tag } from "antd";
+import { format, parseISO } from "date-fns";
+import { getUserById } from "@server/user";
 import ItemTaskMenu from "./ItemTaskMenu";
-import { useContext } from "react";
 import { AuthContext } from "@context/AuthContext";
 import EditTaskModal from "./EditTaskModal";
 import {
   deleteTaskById,
   getMemberByTaskId,
   updateTaskById,
-} from "../../../server/todo";
+} from "@server/todo";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import api from "../../../config/axios";
+import api from "@config/axios";
+import ProgressBar from "@components/UI/ProgressBar";
+import Tooltips from "@/components/common/Tooltips";
+import AvatarGroup from "@/components/common/AvatarGroup";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -34,7 +34,7 @@ const CartTodo = ({
   index,
   id,
   title,
-  description,
+  // description,
   due_date,
   processValue,
   priority,
@@ -46,6 +46,8 @@ const CartTodo = ({
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const responsiveText = "phone:text-xs tablet:text-sm desktoplg:text-base";
 
   const {
     tasksUser,
@@ -59,7 +61,7 @@ const CartTodo = ({
 
   const formatDate = useCallback((dateString) => {
     const parsedDate = parseISO(dateString);
-    return format(parsedDate, "dd/MM/yyyy");
+    return format(parsedDate, "MM/dd/yyyy");
   }, []);
 
   useEffect(() => {
@@ -137,8 +139,8 @@ const CartTodo = ({
   };
 
   return (
-    <div key={id} className="task-item">
-      <Tooltip title="Priority">
+    <div key={id} className="task-item laptop:max-w-96">
+      <Tooltips title="Priority">
         {priority === "Urgent" ? (
           <div className="priority">
             <Tag color="magenta">Urgent</Tag>
@@ -156,9 +158,9 @@ const CartTodo = ({
             <Tag color="green">Low</Tag>
           </div>
         )}
-      </Tooltip>
-      <Tooltip title="Title">
-        <div className="">
+      </Tooltips>
+      <Tooltips title={`${title}`}>
+        <div className={responsiveText}>
           {index % 3 === 0 ? (
             <h3 className="title title1">{title}</h3>
           ) : index % 3 === 1 ? (
@@ -167,30 +169,29 @@ const CartTodo = ({
             <h3 className="title title3">{title}</h3>
           )}
         </div>
-      </Tooltip>
-      <div className="flex flex-col gap-1 ml-2">
-        <Tooltip title="Description">
-          <p className="description">{description}</p>
-        </Tooltip>
-        <Tooltip title="Due date">
-          <p className="due_date">{formatDate(due_date)}</p>
-        </Tooltip>
+      </Tooltips>
+
+      <div className="flex ml-1">
+        <Tooltips title="Due date">
+          <p className={`due_date ${responsiveText} text-[#b5b5b5]`}>
+            {formatDate(due_date)}
+          </p>
+        </Tooltips>
       </div>
-      <Tooltip title="Members" placement="right">
-        <AvatarGroup max={4} className="avatar-group">
-          {members.map((member, index) => (
-            <Avatar
-              key={index}
-              alt={member.data.name}
-              src={member.data.avatarUrl || "/static/images/avatar/default.jpg"}
-              className="avatar"
-            />
-          ))}
-        </AvatarGroup>
-      </Tooltip>
-      <Tooltip title="Process">
-        <Progress percent={processValue} status="active" />
-      </Tooltip>
+
+      <div className="mt-3 flex justify-end">
+        <Tooltips title="Members">
+          <AvatarGroup
+            avatars={members.map((member) => member.data.avatarUrl)}
+            size="9"
+          />
+        </Tooltips>
+      </div>
+      <div className="mt-3">
+        <Tooltips title={`${processValue}%`}>
+          <ProgressBar processValue={processValue} />
+        </Tooltips>
+      </div>
       <ItemTaskMenu
         onEdit={() => handleEditTask(task)}
         onDelete={handleDelete}

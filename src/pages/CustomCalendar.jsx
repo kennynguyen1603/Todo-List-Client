@@ -63,7 +63,7 @@ const CustomCalendar = () => {
             {day.getDate()}
           </div>
           {isHovered && (
-            <div className="absolute bottom-[2px] right-6">
+            <div className="absolute bottom-[2px] right-7">
               <ButtonAddTodo fontsize={"text-xs"} content="+" />
             </div>
           )}

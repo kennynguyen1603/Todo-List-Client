@@ -19,36 +19,33 @@
 }
 .task-list .list .task-item {
   position: relative;
-  width: 77%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 85%;
   border-radius: 10px;
   margin-bottom: 15px;
-  height: 200px;
-  padding: 12px;
-  display: flex;
-  gap: 5px;
-  flex-direction: column;
+  padding: 15px 12px;
   background-color: #f4f4f4;
-  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
 }
 .task-list .list .task-item .priority {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 5px;
-  color: #fff;
-  border-radius: 10px;
+  top: 1px;
+  right: -5px;
 }
 .task-list .list .task-item .title {
-  font-size: 0.9rem;
-  font-weight: 500;
-  display: inline-block;
-  height: 30px;
+  display: flex;
+  width: fit-content;
+  max-width: 50%;
+  padding: 1px 10px;
   border-radius: 20px;
-  padding: 6px 10px;
   text-align: center;
-  overflow: hidden;
+  overflow-x: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  margin-bottom: 5px;
 }
 .task-list .list .task-item .title1 {
   background: #e9dff4;
@@ -62,11 +59,7 @@
   background: #deeffa;
   color: #057ec8;
 }
-.task-list .list .task-item .description,
-.task-list .list .task-item .due_date {
-  font-size: 1rem;
-  color: #b5b5b5;
-}
+
 .task-list .list .task-item .description {
   width: 300px;
   overflow: hidden;

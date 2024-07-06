@@ -64,10 +64,7 @@ const TaskTableView = ({
       <thead>
         <tr className="border-b">
           {headerOfTable.map((header) => (
-            <th
-              key={header}
-              className="py-2 text-center text-slate-400 text-sm"
-            >
+            <th key={header} className="py-2 text-center text-sm">
               {header}
             </th>
           ))}
@@ -162,7 +159,7 @@ const TaskTableView = ({
                   className="w-full col-span-2"
                 />
               </Tooltip>
-              <div className="flex text-sm w-full">
+              <div className="flex text-sm">
                 {taskList.completedTasks} / {taskList.todolist.length}
               </div>
             </td>

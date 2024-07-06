@@ -16,6 +16,33 @@ export default {
         poppins: ["Poppins", "sans-serif"],
       },
     },
+    keyframes: {
+      glow: {
+        "0%": { left: "-100%" },
+        "50%": { left: "50%" },
+        "100%": { left: "100%" },
+      },
+    },
+    animation: {
+      glow: "glow 3s infinite",
+    },
+
+    screens: {
+      phone: "480px",
+      // => @media (min-width: 480px) { ... }
+
+      tablet: "640px",
+      // => @media (min-width: 640px) { ... }
+
+      laptop: "1024px",
+      // => @media (min-width: 1024px) { ... }
+
+      desktop: "1280px",
+      // => @media (min-width: 1280px) { ... }
+
+      desktoplg: "1560px",
+      // => @media (min-width: 1580px) { ... }
+    },
   },
   plugins: [import("flowbite/plugin")],
 };
