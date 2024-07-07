@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 import { useEffect, useState, useCallback, useContext } from "react";
 import { Tag } from "antd";
 import { format, parseISO } from "date-fns";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
 import { getUserById } from "@server/user";
 import ItemTaskMenu from "./ItemTaskMenu";
 import { AuthContext } from "@context/AuthContext";
@@ -11,10 +13,9 @@ import {
   getMemberByTaskId,
   updateTaskById,
 } from "@server/todo";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
+
 import api from "@config/axios";
-import ProgressBar from "@components/UI/ProgressBar";
+import ProgressBar from "@components/ui/ProgressBar";
 import Tooltips from "@/components/common/Tooltips";
 import AvatarGroup from "@/components/common/AvatarGroup";
 
@@ -34,7 +35,6 @@ const CartTodo = ({
   index,
   id,
   title,
-  // description,
   due_date,
   processValue,
   priority,

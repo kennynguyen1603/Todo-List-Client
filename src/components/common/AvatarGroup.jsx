@@ -16,7 +16,7 @@ const AvatarGroup = ({ avatars, maxVisible = 5, size = 10 }) => {
             <img
               src={avatar}
               alt="Av"
-              className="w-full h-full object-cover rounded-full"
+              className="w-full h-full object-cover aspect-square rounded-full"
             />
           ) : (
             <AvatarDefault size="16" />

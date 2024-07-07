@@ -313,7 +313,7 @@ body .main .wrapper .main-content .dashboard .todaysSchedule {
   padding: 0 0.7%;
   position: relative;
 }
-body .main .wrapper .main-content .dashboard .todaysSchedule .header {
+/* body .main .wrapper .main-content .dashboard .todaysSchedule .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -373,7 +373,7 @@ body
 body .main .wrapper .main-content .dashboard .todaysSchedule .header .elements {
   font-size: 1.6rem;
   gap: 7px;
-}
+} */
 body .main .wrapper .main-content .dashboard .todaysSchedule .time-tracker {
   background-color: #ffffff;
   height: 10vh;
