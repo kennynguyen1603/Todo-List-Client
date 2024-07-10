@@ -117,17 +117,17 @@ const TaskOverView = () => {
 
   return (
     <div className="taskOverview">
-      <div className="taskSummary flex flex-col desktoplg:gap-3 laptop:gap-2">
-        <p className="desktoplg:text-2xl laptop:text-xl italic">
+      <div className="taskSummary flex flex-col desktop:gap-3 laptop:gap-2">
+        <p className="desktop:text-2xl laptop:text-xl italic">
           Hello, {user?.username}!
         </p>
-        <p className="desktoplg:text-2xl laptop:text-xl font-semibold">
+        <p className="desktop:text-2xl laptop:text-xl font-semibold">
           {todayTaskCount > 0
             ? `You have got ${todayTaskCount} tasks today!`
             : "You have no tasks today!"}
         </p>
         <div className="searchBar mt-1">
-          <IoMdSearch className="desktoplg:text-2xl laptop:text-xl font-semibold ml-1" />
+          <IoMdSearch className="desktop:text-2xl laptop:text-xl font-semibold ml-1" />
           <input
             type="text"
             value={search}
@@ -137,7 +137,7 @@ const TaskOverView = () => {
         </div>
       </div>
       <div className="taskDetail">
-        <p className="desktoplg:text-2xl laptop:text-xl font-semibold mb-2">
+        <p className="desktop:text-2xl laptop:text-xl font-semibold mb-2">
           My Tasks
         </p>
         <div className="flex justify-between">
@@ -174,7 +174,7 @@ const TaskOverView = () => {
             Later
           </button>
         </div>
-        <div className="filters flex flex-wrap justify-evenly desktoplg:mt-2 laptop:mt-1">
+        <div className="filters flex flex-wrap justify-evenly desktop:mt-2 laptop:mt-1">
           <select
             name="status"
             value={filters.status}
@@ -203,7 +203,7 @@ const TaskOverView = () => {
             onChange={handleFilterChange}
           />
         </div>
-        <div className="h-full laptop:max-h-[53vh] desktoplg:max-h-[56vh]">
+        <div className="h-full laptop:max-h-[53vh] desktop:max-h-[56vh]">
           <TaskList taskList={filteredTasksUser} />
         </div>
       </div>

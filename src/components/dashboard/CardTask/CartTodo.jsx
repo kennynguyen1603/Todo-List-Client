@@ -13,12 +13,11 @@ import {
   getMemberByTaskId,
   updateTaskById,
 } from "@server/todo";
-
 import api from "@config/axios";
-import ProgressBar from "@components/ui/ProgressBar";
-import Tooltips from "@components/common/Tooltips";
+// import ProgressBar from "@components/ui/ProgressBar";
 import AvatarGroup from "@components/common/AvatarGroup";
-
+import Tooltips from "@components/common/Tooltips";
+import ProgressBar from "@/components/ui/ProgressBar";
 const style = {
   position: "absolute",
   top: "50%",
@@ -47,7 +46,7 @@ const CartTodo = ({
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const responsiveText = "phone:text-xs tablet:text-sm desktoplg:text-base";
+  const responsiveText = "phone:text-xs tablet:text-sm desktop:text-base";
 
   const {
     tasksUser,
@@ -139,7 +138,7 @@ const CartTodo = ({
   };
 
   return (
-    <div key={id} className="task-item laptop:max-w-96">
+    <div key={id} className="task-item laptop:max-w-96 desktop:max-w-[450px] ">
       <Tooltips title="Priority">
         {priority === "Urgent" ? (
           <div className="priority">

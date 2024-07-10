@@ -3,7 +3,6 @@
   scroll-behavior: smooth;
   padding: 15px;
   box-sizing: border-box;
-  /* margin-top: 10px; */
   height: 100%;
   position: relative;
   /* Tùy chỉnh thanh cuộn cho Firefox */
@@ -22,7 +21,6 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  width: 85%;
   border-radius: 10px;
   margin-bottom: 15px;
   padding: 15px 12px;

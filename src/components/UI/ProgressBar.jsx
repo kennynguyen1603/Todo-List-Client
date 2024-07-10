@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const ProgressBar = ({ processValue, height = 8 }) => {
   return (
     <div
-      className={`flex w-full bg-gray-200 rounded-full mb-2 dark:bg-gray-700 relative overflow-hidden`}
+      className={`flex w-full bg-gray-200 rounded-full mb-2 relative overflow-hidden`}
       style={{ height: `${height}px` }}
     >
       <div
