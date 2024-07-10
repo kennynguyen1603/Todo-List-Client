@@ -30,14 +30,14 @@ export default defineConfig({
     },
   },
 
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ["react", "react-dom"], // tách riêng các thư viện bên thứ ba
-          "lodash-vendor": ["lodash"],
-        },
-      },
-    },
-  },
+  // build: {
+  //   rollupOptions: {
+  //     output: {
+  //       manualChunks: {
+  //         vendor: ["react", "react-dom"], // tách riêng các thư viện bên thứ ba
+  //         "lodash-vendor": ["lodash"],
+  //       },
+  //     },
+  //   },
+  // },
 });

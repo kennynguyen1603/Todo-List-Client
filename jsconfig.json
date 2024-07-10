@@ -1,8 +1,17 @@
-{  "compilerOptions": {
+{
+  "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@context/*": ["src/context/*"],
+      "@pages/*": ["src/pages/*"],
+      "@styles/*": ["src/styles/*"],
+      "@utils/*": ["src/utils/*"],
+      "@server/*": ["src/server/*"],
+      "@svg/*": ["src/svg/*"],
+      "@config/*": ["src/config/*"]
     }
-  }
+  },
+  "exclude": ["node_modules", "dist"]
 }

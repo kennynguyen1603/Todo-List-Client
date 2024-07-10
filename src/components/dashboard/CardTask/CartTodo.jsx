@@ -16,8 +16,8 @@ import {
 
 import api from "@config/axios";
 import ProgressBar from "@components/ui/ProgressBar";
-import Tooltips from "@/components/common/Tooltips";
-import AvatarGroup from "@/components/common/AvatarGroup";
+import Tooltips from "@components/common/Tooltips";
+import AvatarGroup from "@components/common/AvatarGroup";
 
 const style = {
   position: "absolute",
