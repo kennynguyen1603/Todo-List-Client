@@ -8,15 +8,15 @@ const Header = ({ user }) => {
     return <div>Loading user data...</div>;
   }
   return (
-    <div
-      className="flex justify-between items-center mb-4 hover:cursor-pointer hover:bg-gray-100 p-4 rounded-md shadow-sm"
-      onClick={() => navigate("/profile")}
-    >
-      <div className="flex items-center gap-3">
+    <div className="flex justify-between items-center desktop:p-4 laptop:p-2 mb-4  hover:bg-gray-100 rounded-md shadow-sm">
+      <div
+        className="flex items-center gap-3 hover:cursor-pointer"
+        onClick={() => navigate("/profile")}
+      >
         <img
           src={user?.avatarUrl}
           alt={user?.username}
-          className="w-16 h-16 rounded-full object-contain aspect-square"
+          className="desktop:w-16 laptop:w-[3.4rem] rounded-full object-contain aspect-square"
         />
         <div>
           <p className="font-medium">{user?.username}</p>

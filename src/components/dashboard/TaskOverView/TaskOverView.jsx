@@ -117,7 +117,7 @@ const TaskOverView = () => {
 
   return (
     <div className="taskOverview">
-      <div className="taskSummary flex flex-col desktop:gap-3 laptop:gap-2">
+      <div className="taskSummary flex flex-col desktop:gap-3 laptop:gap-1.5">
         <p className="desktop:text-2xl laptop:text-xl italic">
           Hello, {user?.username}!
         </p>
@@ -203,7 +203,7 @@ const TaskOverView = () => {
             onChange={handleFilterChange}
           />
         </div>
-        <div className="h-full laptop:max-h-[53vh] desktop:max-h-[56vh]">
+        <div className="h-full laptop:max-h-[56vh] desktop:max-h-[58vh]">
           <TaskList taskList={filteredTasksUser} />
         </div>
       </div>

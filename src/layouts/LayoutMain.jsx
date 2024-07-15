@@ -5,7 +5,7 @@ import Sidebar from "../components/sidebar/Sidebar";
 const LayoutMain = () => {
   return (
     <div className="main">
-      <div className="wrapper container">
+      <div className="wrapper">
         <div className="sidebar">
           <Sidebar />
         </div>

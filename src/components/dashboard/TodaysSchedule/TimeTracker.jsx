@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { FaPlay, FaRegCircleStop } from "react-icons/fa6";
-import { FaRegPauseCircle } from "react-icons/fa";
 
 const TimeTracker = ({ onStartTracking, onStopTracking }) => {
   const [isTracking, setIsTracking] = useState(false);
@@ -56,10 +55,12 @@ const TimeTracker = ({ onStartTracking, onStopTracking }) => {
 
   const { hours, minutes, seconds } = formatTime(elapsedTime);
 
+  // const textResponsive =
+  //   "phone:text-xs tablet:text-sm laptop:text-base desktop:text-xl";
+
   const displatTime = () => {
     return (
-      <div className="time-display flex text-xl text-customGreen font-medium ">
-        {/* <div>Time elapsed: </div> */}
+      <div className="time-display flex desktop:text-xl laptop:text-base text-customGreen font-medium">
         <span>{hours}</span>
         <span className="time-separator px-1">:</span>
         <span>{minutes}</span>
@@ -71,11 +72,13 @@ const TimeTracker = ({ onStartTracking, onStopTracking }) => {
   return (
     <div className="time-tracker">
       <div className="flex flex-col pl-1 items-start">
-        <span className="font-medium text-xl h-1/2">Project time tracker</span>
+        <span className="font-medium desktop:text-xl laptop:text-lg h-1/2">
+          Project time tracker
+        </span>
         {isTracking ? (
           displatTime()
         ) : (
-          <span className="text-gray71 font-normal text-lg ">
+          <span className="text-gray71 font-normal desktop:text-lg laptop:text-base">
             You can start tracking.
           </span>
         )}

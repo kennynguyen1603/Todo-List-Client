@@ -23,7 +23,7 @@ const ButtonAddTodo = ({ fontsize = "text-base", content = "+ add task" }) => {
     <div>
       <button
         onClick={handleOpen}
-        className={`${fontsize} px-2 py-1 font-semibold rounded-lg text-[#5accbb] hover:bg-[#5accbb] hover:text-white capitalize`}
+        className={`${fontsize} px-2 py-1.5 font-semibold rounded-lg text-[#5accbb] hover:bg-[#5accbb] hover:text-white capitalize`}
       >
         {content}
       </button>

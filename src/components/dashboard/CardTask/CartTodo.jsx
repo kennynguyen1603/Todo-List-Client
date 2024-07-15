@@ -14,7 +14,6 @@ import {
   updateTaskById,
 } from "@server/todo";
 import api from "@config/axios";
-// import ProgressBar from "@components/ui/ProgressBar";
 import AvatarGroup from "@components/common/AvatarGroup";
 import Tooltips from "@components/common/Tooltips";
 import ProgressBar from "@/components/ui/ProgressBar";
@@ -138,7 +137,10 @@ const CartTodo = ({
   };
 
   return (
-    <div key={id} className="task-item laptop:max-w-96 desktop:max-w-[450px] ">
+    <div
+      key={id}
+      className="task-item laptop:max-w-[370px] desktop:max-w-[450px] laptop:h-[190x]"
+    >
       <Tooltips title="Priority">
         {priority === "Urgent" ? (
           <div className="priority">
@@ -182,7 +184,7 @@ const CartTodo = ({
         <Tooltips title="Members">
           <AvatarGroup
             avatars={members.map((member) => member.data.avatarUrl)}
-            size="9"
+            size="10"
           />
         </Tooltips>
       </div>
@@ -192,6 +194,7 @@ const CartTodo = ({
           <ProgressBar processValue={processValue} />
         </Tooltips>
       </div>
+
       <ItemTaskMenu
         onEdit={() => handleEditTask(task)}
         onDelete={handleDelete}

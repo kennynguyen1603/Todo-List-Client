@@ -57,10 +57,10 @@ const TodaysSchedule = () => {
         onStartTracking={handleStartTracking}
         onStopTracking={handleStopTracking}
       />
-      <div className="relative mt-5 mb-6">
+      <div className="relative desktop:mt-5 laptop:mt-3 mb-5">
         <TasksStatus />
-        <div className="absolute  top-[-5px] right-0">
-          <ButtonAddTodo />
+        <div className="absolute top-[-2px] right-0">
+          <ButtonAddTodo fontsize={"text-sm"} />
         </div>
       </div>
       <Calendar onDateSelect={handleDateSelect} taskDates={tasksDates} />

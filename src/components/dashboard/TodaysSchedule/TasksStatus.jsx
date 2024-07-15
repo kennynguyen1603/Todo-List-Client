@@ -53,7 +53,7 @@ const TasksStatus = () => {
 
   const TaskItem = ({ label, quantity, color }) => (
     <div
-      className="p-2 2xl:h-10 2xl:text-sm h-9 text-xs mr-2 rounded-lg flex justify-center items-center"
+      className="desktop:h-10 laptop:h-[35px] desktop:text-sm p-1 text-xs rounded-lg flex justify-center items-center"
       style={{ backgroundColor: color }}
     >
       <div>
@@ -63,24 +63,21 @@ const TasksStatus = () => {
   );
 
   return (
-    <div className="taskStatus my-2">
-      <p className="text-xl font-semibold my-4">Tasks Status</p>
-      <div className="flex justify-between mb-4">
-        <div className="flex flex-wrap justify-center gap-5 ml-2">
+    <div className="taskStatus">
+      <p className="destop:text-xl laptop:text-lg font-semibold my-3">
+        Tasks Status
+      </p>
+      <div className="flex desktop:justify-between justify-around mb-4">
+        <div className="flex flex-wrap justify-center desktop:gap-5 laptop:gap-2 desktop:ml-2">
           {taskData.map((item, index) => (
             <div key={index} className="flex flex-col items-center">
-              <CircularProgressBar
-                percentage={item.value}
-                color={item.color}
-                size={60}
-                trokeWidth={5}
-              >
+              <CircularProgressBar percentage={item.value} color={item.color}>
                 {`${item.value}%`}
               </CircularProgressBar>
 
               <div className="flex items-center mt-2 text-sm">
                 <span
-                  className="h-2 w-2 rounded-full inline-block mr-2"
+                  className="h-1.5 w-1.5 desktop:h-2 desktop:w-2 rounded-full inline-block mr-1.5"
                   style={{ backgroundColor: item.color }}
                 ></span>
                 {item.label}
