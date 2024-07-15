@@ -8,6 +8,7 @@ function Profile() {
     editingSections,
     toggleEditing,
     handleInputChange,
+    handleAvatarChange,
     saveProfile,
   } = useUserProfile();
 
@@ -31,6 +32,18 @@ function Profile() {
                 src={userInfo.avatarUrl}
                 alt={`${userInfo.username}'s avatar`}
               />
+              {editingSections.profile && (
+                <div className="absolute top-[50%] right-0">
+                  <EditableInput
+                    label="Avatar"
+                    type="file"
+                    name="avatarUrl"
+                    isEditing={editingSections.profile}
+                    onChange={handleAvatarChange}
+                    accept="image/*"
+                  />
+                </div>
+              )}
               <div>
                 <p className="font-bold text-xl mb-4">{userInfo.username}</p>
                 <p className="font-bold text-xs mb-1">

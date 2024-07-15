@@ -43,6 +43,16 @@ const useUserProfile = () => {
     }));
   };
 
+  const handleAvatarChange = (e) => {
+    const avatar = e.target.files[0];
+    if (avatar) {
+      setUserInfo((prev) => ({
+        ...prev,
+        avatarUrl: URL.createObjectURL(avatar),
+      }));
+    }
+  };
+
   const saveProfile = async () => {
     // Save the updated user info to the database
     const accessToken = localStorage.getItem("accessToken");
@@ -65,7 +75,7 @@ const useUserProfile = () => {
         );
         if (response.status === 200) {
           // Update the user context
-          const { username, email, career } = response.data;
+          const { username, email, career } = response.data.data;
           setUserInfo((prev) => ({
             ...prev,
             username,
@@ -89,6 +99,7 @@ const useUserProfile = () => {
     editingSections,
     toggleEditing,
     handleInputChange,
+    handleAvatarChange,
     saveProfile,
   };
 };

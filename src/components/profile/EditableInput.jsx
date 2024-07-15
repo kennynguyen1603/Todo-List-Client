@@ -1,6 +1,14 @@
-import React, { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 
-const EditableInput = ({ label, type, name, value, isEditing, onChange }) => {
+const EditableInput = ({
+  label,
+  type,
+  name,
+  value,
+  isEditing,
+  onChange,
+  accept,
+}) => {
   const inputRef = useRef(null);
   const [inputWidth, setInputWidth] = useState("auto");
 
@@ -20,6 +28,7 @@ const EditableInput = ({ label, type, name, value, isEditing, onChange }) => {
           name={name}
           value={value}
           onChange={onChange}
+          accept={accept}
           className="text-sm border-[1px] border-gray-200 rounded-md p-2"
         />
       ) : (

@@ -43,6 +43,7 @@ ProfileSection.propTypes = {
   children: PropTypes.node.isRequired,
   isEditing: PropTypes.bool.isRequired,
   toggleEditing: PropTypes.func.isRequired,
+  saveProfile: PropTypes.func.isRequired,
 };
 
 export default ProfileSection;
