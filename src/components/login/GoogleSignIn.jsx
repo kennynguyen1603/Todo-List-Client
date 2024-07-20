@@ -43,12 +43,12 @@ const GoogleSignIn = () => {
         <FcGoogle className="googleIcon" />
         Sign in with Google
       </button>
-      <div className="signUp">
+      {/* <div className="signUp">
         Are you new?{" "}
         <NavLink to="/auth/register" className="signUpLink">
           Create an Account
         </NavLink>
-      </div>
+      </div> */}
     </div>
   );
 };

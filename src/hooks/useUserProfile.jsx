@@ -48,7 +48,7 @@ const useUserProfile = () => {
     if (avatar) {
       setUserInfo((prev) => ({
         ...prev,
-        avatarUrl: URL.createObjectURL(avatar),
+        avatarUrl: avatar,
       }));
     }
   };
@@ -57,27 +57,38 @@ const useUserProfile = () => {
     // Save the updated user info to the database
     const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      };
+      // const config = {
+      //   headers: {
+      //     Authorization: `Bearer ${accessToken}`,
+      //   },
+      // };
+      console.log("🚀 ~ useUserProfile ~ userInfo:", userInfo);
+
       try {
         const response = await api.put(
           `/users/${user._id}`,
+          // {
+          //   avatarUrl: userInfo.avatarUrl,
+          //   username: userInfo.username,
+          //   email: userInfo.email,
+          //   career: userInfo.career,
+          // },
+          userInfo,
           {
-            avatarUrl: userInfo.avatarUrl,
-            username: userInfo.username,
-            email: userInfo.email,
-            career: userInfo.career,
-          },
-          config
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
         );
+        console.log("🚀 ~ saveProfile ~ response:", response.data);
+        alert("Edit Profile Successful");
+
         if (response.status === 200) {
           // Update the user context
-          const { username, email, career } = response.data.data;
+          const { avatarUrl, username, email, career } = response.data.data;
           setUserInfo((prev) => ({
             ...prev,
+            avatarUrl,
             username,
             email,
             career,
@@ -92,6 +103,7 @@ const useUserProfile = () => {
         console.error(error);
       }
     }
+    console.log("🚀 ~ saveProfile ~ userInfo:", userInfo);
   };
 
   return {

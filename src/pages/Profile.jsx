@@ -28,7 +28,7 @@ function Profile() {
           >
             <div className="flex items-center gap-8">
               <img
-                className="laptop:w-[6rem] laptop:h-[6rem] desktop:w-[9rem] desktop:h-[9rem] rounded-[50%] object-contain"
+                className="laptop:w-[6rem] laptop:h-[6rem] desktop:w-[9rem] desktop:h-[9rem] rounded-full object-cover"
                 src={userInfo.avatarUrl}
                 alt={`${userInfo.username}'s avatar`}
               />

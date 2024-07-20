@@ -3,15 +3,14 @@
 // import { saveInfoToLocalStorage } from "@/utils/product";
 // import { Helmet } from "react-helmet";
 // import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Import thêm các hook cần thiết từ react-router-dom
-import { NavLink } from "react-router-dom";
-import "../styles/auth.css";
-import { Field, Form, Formik, useField } from "formik";
+import { NavLink, useNavigate } from "react-router-dom";
+import "@styles/auth.css";
+import { Field, Form, Formik, useField, useFormikContext } from "formik";
 import * as Yup from "yup";
-import { FcGoogle } from "react-icons/fc";
-import { useState } from "react";
-import api from "../config/axios.js";
+import { useEffect, useState } from "react";
+import api from "@config/axios.js";
 import PropTypes from "prop-types";
+import GoogleSignIn from "@components/login/GoogleSignIn";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().min(6, "Too Short!").required("Username is required"),
@@ -36,47 +35,31 @@ CustomErrorMessage.propTypes = {
   name: PropTypes.string.isRequired,
 };
 
-const GoogleSignUp = () => {
-  return (
-    <div className="authSection">
-      <div className="separator">
-        <hr className="line" />
-        <span className="or">or</span>
-        <hr className="line" />
-      </div>
-      <button className="googleSignIn">
-        <FcGoogle className="googleIcon" />
-        Sign in with Google
-      </button>
-      <div className="signUp">
-        You already have an account?{" "}
-        <NavLink to="/auth/login" className="signUpLink">
-          Login
-        </NavLink>
-      </div>
-    </div>
-  );
+const LogFormChanges = () => {
+  const { values } = useFormikContext();
+
+  useEffect(() => {
+    console.log("Form values changed: ", values);
+  }, [values]);
+
+  return null;
 };
 
 // Register component
 const Register = () => {
-  const [avatar, setAvatar] = useState(
-    "https://inkythuatso.com/uploads/thumbnails/800/2023/03/9-anh-dai-dien-trang-inkythuatso-03-15-27-03.jpg"
-  );
+  const defaultAvatarUrl =
+    "https://inkythuatso.com/uploads/thumbnails/800/2023/03/9-anh-dai-dien-trang-inkythuatso-03-15-27-03.jpg";
+  const [avatar, setAvatar] = useState(defaultAvatarUrl);
   const [avatarFile, setAvatarFile] = useState(null);
 
-  // const [showPassword, setShowPassword] = useState(false); // State: display the password
-  // const [registrationStatus, setRegistrationStatus] = useState();
-
-  // const togglePasswordVisibility = () => {
-  //   // change the display status of password
-  //   setShowPassword(!showPassword);
-  // };
   const navigate = useNavigate();
+
   const handleAvatarChange = (event) => {
     const avatar = event.target.files[0];
     if (avatar) {
-      setAvatar(URL.createObjectURL(avatar));
+      const avatarUrl = URL.createObjectURL(avatar);
+      console.log("Avatar: ", avatarUrl, avatar);
+      setAvatar(avatarUrl);
       setAvatarFile(avatar);
     }
   };
@@ -133,6 +116,7 @@ const Register = () => {
       >
         {({ isSubmitting }) => (
           <Form className="formContainer">
+            <LogFormChanges />
             <div className="avatar">
               {avatar && (
                 <img
@@ -214,7 +198,12 @@ const Register = () => {
           </Form>
         )}
       </Formik>
-      <GoogleSignUp />
+      <GoogleSignIn />
+      <div className="signUp">
+        <NavLink to="/auth/login" className="signUpLink">
+          You have an account
+        </NavLink>
+      </div>
     </div>
   );
 };

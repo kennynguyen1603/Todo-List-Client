@@ -102,6 +102,12 @@ const Login = () => {
         </Form>
       </Formik>
       <GoogleSignIn />
+      <div className="signUp">
+        Are you new?{" "}
+        <NavLink to="/auth/register" className="signUpLink">
+          Create an Account
+        </NavLink>
+      </div>
     </div>
   );
 };
