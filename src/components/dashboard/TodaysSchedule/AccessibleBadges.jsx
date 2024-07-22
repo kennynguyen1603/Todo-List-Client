@@ -3,6 +3,8 @@
 // import MailIcon from "@mui/icons-material/Mail";
 // import { Notifications } from "@mui/icons-material";
 import { IoMdNotifications, IoIosMail } from "react-icons/io";
+import { useState, useContext } from "react";
+import { AuthContext } from "@context/AuthContext";
 // function notificationsLabel(count) {
 //   if (count === 0) {
 //     return "no notifications";
@@ -14,6 +16,8 @@ import { IoMdNotifications, IoIosMail } from "react-icons/io";
 // }
 
 export default function AccessibleBadges() {
+  const [isOpenNotifications, setIsOpenNotifications] = useState(false);
+  const { invitations } = useContext(AuthContext);
   return (
     <div className="flex text-2xl gap-2">
       {/* <IconButton aria-label={notificationsLabel(100)}>

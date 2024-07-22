@@ -13,8 +13,6 @@ const CustomCalendar = () => {
   const monthDays = getMonthDays(year, month);
   const weekDays = getWeekDays();
 
-  console.log("hello");
-
   const getListData = (date) => {
     const dateStr = date.toISOString().split("T")[0];
     return tasksUser

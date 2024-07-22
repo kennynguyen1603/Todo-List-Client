@@ -1,13 +1,15 @@
 import { createContext, useState, useEffect, useCallback } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import api, { updateAuthorization } from "../config/axios";
-import { getTodosByUserId } from "../server/todo";
+import api, { updateAuthorization } from "@config/axios";
+import { getTodosByUserId } from "@server/todo";
 import { Alert } from "antd";
 import PropTypes from "prop-types";
 import { jwtDecode } from "jwt-decode";
 import CircularProgress from "@mui/material/CircularProgress";
-const AuthContext = createContext();
+import { io } from "socket.io-client";
 
+const AuthContext = createContext();
+const socket = io(import.meta.env.VITE_API_BASE_URL || "http://localhost:8080");
 const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -34,6 +36,8 @@ const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [loginSuccess, setLoginSuccess] = useState(false);
 
+  const [invitations, setInvitations] = useState([]); // List of invitations
+
   useEffect(() => {
     const initializeAuthState = () => {
       const token = localStorage.getItem("accessToken");
@@ -45,6 +49,7 @@ const AuthProvider = ({ children }) => {
           user: user,
           isAuthenticated: true,
         });
+        socket.emit("initialize", user.userId);
       } else {
         setAuthState({
           accessToken: null,
@@ -55,6 +60,32 @@ const AuthProvider = ({ children }) => {
     };
 
     initializeAuthState();
+  }, []);
+
+  useEffect(() => {
+    socket.on("allInvitations", (allInvitations) => {
+      setInvitations(allInvitations);
+    });
+
+    socket.on("updateInvitations", (updateInvitations) => {
+      setInvitations(updateInvitations);
+    });
+
+    socket.on("newInvitation", (data) => {
+      const { teamId, email } = data;
+      alert(`You have a new invitation from ${email} to join team ${teamId}`);
+    });
+
+    socket.on("disconnect", () => {
+      console.log("Socket disconnected");
+    });
+
+    return () => {
+      socket.off("allInvitations");
+      socket.off("updateInvitations");
+      socket.off("newInvitation");
+      socket.off("disconnect");
+    };
   }, []);
 
   const checkTokenExpiration = useCallback(() => {
@@ -206,6 +237,8 @@ const AuthProvider = ({ children }) => {
         error,
         taskLists,
         setTaskLists,
+        invitations,
+        setInvitations,
       }}
     >
       {!loading ? (

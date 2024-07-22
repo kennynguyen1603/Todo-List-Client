@@ -15,12 +15,17 @@ import {
   FormControl,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import api from "../../../config/axios";
-import { createTask } from "../../../server/todo";
-import { createTeam, updateTeam } from "../../../server/team";
-import { addTeamToUser } from "../../../server/user";
-import { AuthContext } from "../../../context/AuthContext";
+import api from "@config/axios";
+import { createTask } from "@server/todo";
+import { createTeam, updateTeam } from "@server/team";
+import { addTeamToUser } from "@server/user";
+import { AuthContext } from "@context/AuthContext";
 import { debounce } from "lodash";
+import { io } from "socket.io-client";
+
+const socket = io(
+  import.meta.env.REACT_APP_SOCKET_URL || "http://localhost:8080"
+);
 
 const FormAddTask = () => {
   const {
@@ -37,7 +42,7 @@ const FormAddTask = () => {
     status: "Not Started",
     due_date: "",
     priority: "Medium",
-    lists: [], // List ID
+    lists: [], // List ID of selected lists
   });
 
   const [teamMembers, setTeamMembers] = useState([]); // List of members
@@ -50,6 +55,10 @@ const FormAddTask = () => {
 
   const user = localStorage.getItem("user"); // Get user from localStorage
   const userId = user ? JSON.parse(user).userId : null;
+
+  useEffect(() => {
+    console.log("🚀 ~ FormAddTask ~ selectedEmails:", selectedEmails);
+  }, [selectedEmails]);
 
   useEffect(() => {
     const fetchLists = async () => {
@@ -199,6 +208,26 @@ const FormAddTask = () => {
       setFilteredTasksUser((prevTasks) => [newTask.data, ...prevTasks]);
       setTasksDates((prevTasks) => [newTask.data, ...prevTasks]);
       setSelectedDateTasks((prevTasks) => [newTask.data, ...prevTasks]);
+
+      // Gửi lời mời qua Socket.IO
+      selectedEmails.forEach((member) => {
+        console.log(
+          "🚀 ~ selectedEmails.forEach ~ selectedEmails:",
+          selectedEmails
+        );
+        // socket.emit("sendInvitation", {
+        //   email: member,
+        //   teamId: createdTeam._id,
+        //   taskId: newTask.data._id,
+        // });
+        if (member._id !== userId) {
+          socket.emit("sendInvitation", {
+            teamId: createdTeam._id,
+            teamName: teamData.name,
+            taskId: newTask.data._id,
+          });
+        }
+      });
 
       alert("Task added successfully!");
       setFormData({
