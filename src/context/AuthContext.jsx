@@ -10,6 +10,7 @@ import { io } from "socket.io-client";
 
 const AuthContext = createContext();
 const socket = io(import.meta.env.VITE_API_BASE_URL || "http://localhost:8080");
+
 const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -61,6 +62,8 @@ const AuthProvider = ({ children }) => {
 
     initializeAuthState();
   }, []);
+
+  console.log("re-render");
 
   useEffect(() => {
     socket.on("allInvitations", (allInvitations) => {
@@ -237,6 +240,7 @@ const AuthProvider = ({ children }) => {
         error,
         taskLists,
         setTaskLists,
+        socket,
         invitations,
         setInvitations,
       }}
