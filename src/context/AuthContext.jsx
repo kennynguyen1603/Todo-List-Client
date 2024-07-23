@@ -63,8 +63,6 @@ const AuthProvider = ({ children }) => {
     initializeAuthState();
   }, []);
 
-  console.log("re-render");
-
   useEffect(() => {
     socket.on("allInvitations", (allInvitations) => {
       setInvitations(allInvitations);
@@ -77,6 +75,14 @@ const AuthProvider = ({ children }) => {
     socket.on("newInvitation", (data) => {
       const { teamId, email } = data;
       alert(`You have a new invitation from ${email} to join team ${teamId}`);
+      setInvitations((prevInvitations) => {
+        if (
+          !prevInvitations.some((invitation) => invitation.teamId === teamId)
+        ) {
+          return [...prevInvitations, data];
+        }
+        return prevInvitations;
+      });
     });
 
     socket.on("disconnect", () => {
