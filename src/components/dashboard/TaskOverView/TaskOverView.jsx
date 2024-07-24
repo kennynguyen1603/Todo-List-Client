@@ -1,13 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import { IoMdSearch } from "react-icons/io";
-import { AuthContext } from "../../../context/AuthContext";
+import { AuthContext } from "@context/AuthContext";
 import {
   getTasks,
   getTasksToday,
   getTasksRecently,
   getTasksUpcoming,
   getTasksLater,
-} from "../../../server/todo";
+} from "@server/todo";
 import TaskList from "../TasksList/TaskList";
 // import { debounce } from "lodash";
 

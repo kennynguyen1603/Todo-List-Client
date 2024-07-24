@@ -19,7 +19,7 @@ const ProgressBar = ({ processValue, height = 8 }) => {
 };
 
 ProgressBar.propTypes = {
-  processValue: PropTypes.string.isRequired,
+  processValue: PropTypes.number.isRequired,
   height: PropTypes.number,
 };
 

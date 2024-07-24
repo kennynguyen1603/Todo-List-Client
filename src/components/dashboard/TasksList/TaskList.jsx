@@ -46,6 +46,7 @@ const TaskList = ({ taskList }) => {
             due_date={task.due_date}
             processValue={task.processValue}
             priority={task.priority}
+            creator={task.creatorId}
             setTasksUser={setTasksUser}
           />
         ))}

@@ -13,7 +13,7 @@ import {
   FormControl,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import { getUserById } from "@server/user";
+// import { getUserById } from "@server/user";
 import DeleteIcon from "@mui/icons-material/Delete";
 import api from "@config/axios";
 import { updateTeam } from "@server/team";
@@ -28,6 +28,8 @@ const EditTaskModal = ({ task, initialMembers, onSave, onCancel }) => {
   const [errors, setErrors] = useState({});
   const [lists, setLists] = useState([]);
   const [emailSearch, setEmailSearch] = useState("");
+
+  const creator = task.creatorId;
 
   useEffect(() => {
     const fetchLists = async () => {
@@ -51,15 +53,15 @@ const EditTaskModal = ({ task, initialMembers, onSave, onCancel }) => {
         }));
 
         try {
-          const creator = await getUserById(task.creatorId);
+          // const creator = await getUserById(task.creatorId);
           const creatorInfo = {
-            _id: creator.data._id,
-            username: creator.data.username,
-            email: creator.data.email,
+            _id: creator._id,
+            username: creator.username,
+            email: creator.email,
           };
 
           const creatorExists = members.some(
-            (member) => member._id === task.creatorId
+            (member) => member._id === creatorInfo._id
           );
 
           if (!creatorExists) {
@@ -78,7 +80,13 @@ const EditTaskModal = ({ task, initialMembers, onSave, onCancel }) => {
     };
 
     initializeSelectedMembers();
-  }, [initialMembers, task.creatorId]);
+  }, [
+    creator._id,
+    creator.email,
+    creator.username,
+    initialMembers,
+    task.creatorId,
+  ]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -149,8 +157,8 @@ const EditTaskModal = ({ task, initialMembers, onSave, onCancel }) => {
     if (!validateForm()) return;
 
     const selectedMemberIds = selectedMembers.map((member) => member._id);
-    if (!selectedMemberIds.includes(task.creatorId)) {
-      selectedMemberIds.push(task.creatorId);
+    if (!selectedMemberIds.includes(creator._id)) {
+      selectedMemberIds.push(creator._id);
     }
 
     try {
@@ -344,7 +352,7 @@ EditTaskModal.propTypes = {
   task: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     team_id: PropTypes.string.isRequired,
-    creatorId: PropTypes.string.isRequired,
+    creatorId: PropTypes.object.isRequired,
     members: PropTypes.arrayOf(
       PropTypes.shape({
         _id: PropTypes.string.isRequired,

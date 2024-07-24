@@ -64,36 +64,71 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    socket.on("allInvitations", (allInvitations) => {
-      setInvitations(allInvitations);
-    });
+    const handleAllInvitations = (allInvitations) => {
+      const uniqueInvitations = new Map();
+      allInvitations.forEach((invitation) => {
+        uniqueInvitations.set(invitation._id, invitation);
+      });
+      setInvitations(Array.from(uniqueInvitations.values()));
+    };
 
-    socket.on("updateInvitations", (updateInvitations) => {
-      setInvitations(updateInvitations);
-    });
+    const handleUpdateInvitations = (updateInvitations) => {
+      const uniqueInvitations = new Map();
+      updateInvitations.forEach((invitation) => {
+        uniqueInvitations.set(invitation._id, invitation);
+      });
+      setInvitations(Array.from(uniqueInvitations.values()));
+    };
 
-    socket.on("newInvitation", (data) => {
-      const { teamId, email } = data;
+    const handleNewInvitation = (newInvitation) => {
+      const { teamId, email } = newInvitation;
       alert(`You have a new invitation from ${email} to join team ${teamId}`);
       setInvitations((prevInvitations) => {
         if (
           !prevInvitations.some((invitation) => invitation.teamId === teamId)
         ) {
-          return [...prevInvitations, data];
+          return [...prevInvitations, newInvitation];
         }
         return prevInvitations;
       });
-    });
+    };
 
-    socket.on("disconnect", () => {
+    // const handleNewInvitation = (newInvitation) => {
+    //   const { teamId, email } = newInvitation;
+    //   alert(`You have a new invitation from ${email} to join team ${teamId}`);
+    //   setInvitations((prevInvitations) => {
+    //     const uniqueInvitations = new Map();
+    //     prevInvitations.forEach((invitation) => {
+    //       uniqueInvitations.set(invitation._id, invitation);
+    //     });
+    //     uniqueInvitations.set(newInvitation._id, newInvitation); // Thêm lời mời mới vào Map
+    //     return Array.from(uniqueInvitations.values());
+    //   });
+    // };
+
+    const handleDeleteInvitation = (data) => {
+      const { taskId } = data;
+      setInvitations((prevInvitations) =>
+        prevInvitations.filter((invitation) => invitation._id !== taskId)
+      );
+    };
+
+    const handleDisconnect = () => {
       console.log("Socket disconnected");
-    });
+    };
+
+    socket.on("allInvitations", handleAllInvitations);
+    socket.on("updateInvitations", handleUpdateInvitations);
+    socket.on("newInvitation", handleNewInvitation);
+    socket.on("taskDeleted", handleDeleteInvitation);
+    socket.on("disconnect", handleDisconnect);
 
     return () => {
-      socket.off("allInvitations");
-      socket.off("updateInvitations");
-      socket.off("newInvitation");
-      socket.off("disconnect");
+      socket.off("allInvitations", handleAllInvitations);
+      socket.off("updateInvitations", handleUpdateInvitations);
+      socket.off("newInvitation", handleNewInvitation);
+      socket.off("taskDeleted", handleDeleteInvitation);
+      socket.off("disconnect", handleDisconnect);
     };
   }, []);
 

@@ -18,15 +18,19 @@ export default function AccessibleBadges() {
       socket.emit("initialize", user.userId);
 
       const handleAllInvitations = (allInvitations) => {
-        setInvitations(allInvitations);
+        const uniqueInvitations = new Map();
+        allInvitations.forEach((invitation) => {
+          uniqueInvitations.set(invitation._id, invitation);
+        });
+        setInvitations(Array.from(uniqueInvitations.values()));
       };
 
-      const handleTaskDeleted = (data) => {
-        const { taskId } = data;
-        setInvitations((prevInvitations) =>
-          prevInvitations.filter((invitation) => invitation.taskId !== taskId)
-        );
-      };
+      // const handleTaskDeleted = (data) => {
+      //   const { taskId } = data;
+      //   setInvitations((prevInvitations) =>
+      //     prevInvitations.filter((invitation) => invitation.taskId !== taskId)
+      //   );
+      // };
 
       socket.on("allInvitations", handleAllInvitations);
       // socket.on("taskDeleted", handleTaskDeleted);

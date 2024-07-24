@@ -36,6 +36,7 @@ const CartTodo = ({
   due_date,
   processValue,
   priority,
+  creator,
   setTasksUser,
 }) => {
   const [members, setMembers] = useState([]);
@@ -180,11 +181,20 @@ const CartTodo = ({
         </Tooltips>
       </div>
 
+      <div className="ml-1">
+        {/* <Tooltips title="Task Creator"> */}
+        <div className="flex">
+          <p className="text-[#b5b5b5]">Task Creator: </p>
+          <p className="ml-2">{creator.username}</p>
+        </div>
+        {/* </Tooltips> */}
+      </div>
+
       <div className="mt-3 flex justify-end">
         <Tooltips title="Members">
           <AvatarGroup
             avatars={members.map((member) => member.data.avatarUrl)}
-            size="10"
+            size={10}
           />
         </Tooltips>
       </div>
@@ -230,6 +240,7 @@ CartTodo.propTypes = {
   processValue: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   priority: PropTypes.string.isRequired,
+  creator: PropTypes.object.isRequired,
   setTasksUser: PropTypes.func.isRequired,
 };
 
