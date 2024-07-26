@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext, useCallback } from "react";
 import { AuthContext } from "@context/AuthContext";
-import ButtonAddTodo from "../../common/ButtonAddTodo";
+import ButtonAddTodo from "@components/common/ButtonAddTodo";
 import TasksStatus from "./TasksStatus";
 import TimeTracker from "./TimeTracker";
 import Calendar from "./Calendar";
-import { getTasksByDate } from "../../../server/todo";
-import TaskList from "../TasksList/TaskList";
+import { getTasksByDate } from "@server/todo";
+import TasksList from "../TasksList/TasksList";
 import Header from "./Header";
 import "@styles/cardTask.css";
 
@@ -57,15 +57,13 @@ const TodaysSchedule = () => {
         onStartTracking={handleStartTracking}
         onStopTracking={handleStopTracking}
       />
-      <div className="relative desktop:mt-5 laptop:mt-3 mb-5">
+      <div className="relative desktop:mt-4 laptop:mt-3 mb-5">
         <TasksStatus />
-        <div className="absolute top-[-2px] right-0">
-          <ButtonAddTodo fontsize={"text-sm"} />
-        </div>
+        <ButtonAddTodo />
       </div>
       <Calendar onDateSelect={handleDateSelect} taskDates={tasksDates} />
       <div className="taskByDate">
-        <TaskList taskList={selectedDateTasks} />
+        <TasksList tasksList={selectedDateTasks} />
       </div>
     </div>
   );

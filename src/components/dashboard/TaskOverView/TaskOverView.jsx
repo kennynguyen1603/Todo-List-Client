@@ -8,7 +8,7 @@ import {
   getTasksUpcoming,
   getTasksLater,
 } from "@server/todo";
-import TaskList from "../TasksList/TaskList";
+import TasksList from "../TasksList/TasksList";
 // import { debounce } from "lodash";
 
 const TaskOverView = () => {
@@ -204,7 +204,7 @@ const TaskOverView = () => {
           />
         </div>
         <div className="h-full laptop:max-h-[56vh] desktop:max-h-[58vh]">
-          <TaskList taskList={filteredTasksUser} />
+          <TasksList tasksList={filteredTasksUser} />
         </div>
       </div>
     </div>

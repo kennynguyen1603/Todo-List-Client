@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import Button from "@mui/material/Button";
+import PropTypes from "prop-types";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import NewFormAddTask from "@components/dashboard/Forms/NewFormAddTask";
@@ -15,15 +15,15 @@ const style = {
   p: 4,
 };
 
-const ButtonAddTodo = ({ fontsize = "text-base", content = "+ add task" }) => {
+const ButtonAddTodo = ({ content = "+ add task" }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
-    <div>
+    <div className="absolute top-[-3px] right-0">
       <button
         onClick={handleOpen}
-        className={`${fontsize} px-2 py-1.5 font-semibold rounded-lg text-[#5accbb] hover:bg-[#5accbb] hover:text-white capitalize`}
+        className={`text-sm desktop:text-base px-2 py-1.5 font-semibold rounded-lg text-[#5accbb] hover:bg-[#5accbb] hover:text-white capitalize`}
       >
         {content}
       </button>
@@ -39,6 +39,10 @@ const ButtonAddTodo = ({ fontsize = "text-base", content = "+ add task" }) => {
       </Modal>
     </div>
   );
+};
+
+ButtonAddTodo.propTypes = {
+  content: PropTypes.string,
 };
 
 export default ButtonAddTodo;

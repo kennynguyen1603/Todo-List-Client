@@ -1,22 +1,18 @@
 import PropTypes from "prop-types";
-import { useEffect, useState, useCallback, useContext } from "react";
+import { useState, useCallback, useContext, memo } from "react";
 import { Tag } from "antd";
 import { format, parseISO } from "date-fns";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import { getUserById } from "@server/user";
 import ItemTaskMenu from "./ItemTaskMenu";
 import { AuthContext } from "@context/AuthContext";
 import EditTaskModal from "./EditTaskModal";
-import {
-  deleteTaskById,
-  getMemberByTaskId,
-  updateTaskById,
-} from "@server/todo";
+import { deleteTaskById, updateTaskById } from "@server/todo";
 import api from "@config/axios";
 import AvatarGroup from "@components/common/AvatarGroup";
 import Tooltips from "@components/common/Tooltips";
 import ProgressBar from "@/components/ui/ProgressBar";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -37,14 +33,14 @@ const CartTodo = ({
   processValue,
   priority,
   creator,
+  members = [],
   setTasksUser,
 }) => {
-  const [members, setMembers] = useState([]);
   const [error, setError] = useState(null);
   const [open, setOpen] = useState(false);
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpen = useCallback(() => setOpen(true), []);
+  const handleClose = useCallback(() => setOpen(false), []);
 
   const responsiveText = "phone:text-xs tablet:text-sm desktop:text-base";
 
@@ -63,63 +59,62 @@ const CartTodo = ({
     return format(parsedDate, "MM/dd/yyyy");
   }, []);
 
-  useEffect(() => {
-    const fetchMembers = async () => {
+  const handleEditTask = useCallback(
+    (task) => {
+      setEditingTask(task);
+      handleOpen();
+    },
+    [handleOpen]
+  );
+
+  const handleUpdateTask = useCallback(
+    async (updatedTask) => {
       try {
-        const memberIds = await getMemberByTaskId(id);
-        const memberPromises = memberIds.map((memberId) =>
-          getUserById(memberId)
-        );
-        const members = await Promise.all(memberPromises);
-        setMembers(members);
+        const updated = await updateTaskById(updatedTask._id, updatedTask);
+
+        if (updated.success) {
+          const updatedTasks = tasksUser.map((task) =>
+            task._id === updated.data._id ? updated.data : task
+          );
+
+          const response = await api.get("/todoList/user");
+          const updatedTaskLists = response.data.data;
+
+          setTaskLists(updatedTaskLists);
+
+          setTasksUser(updatedTasks);
+          setFilteredTasksUser(updatedTasks);
+          setTasksDates(updatedTasks);
+          setSelectedDateTasks(updatedTasks);
+
+          setEditingTask(null);
+          alert("Todo updated successfully");
+          handleClose();
+        } else {
+          throw new Error(updated.message);
+        }
       } catch (error) {
-        console.error("Failed to fetch members:", error);
+        console.error("Failed to update todo:", error);
+        alert("Failed to update todo");
+        if (error.response && error.response.status === 401) {
+          console.log("Session expired. Logging out...");
+        } else {
+          setError("Failed to update task. Please try again.");
+        }
       }
-    };
-    fetchMembers();
-  }, [id, tasksUser]);
+    },
+    [
+      tasksUser,
+      handleClose,
+      setTasksUser,
+      setFilteredTasksUser,
+      setTasksDates,
+      setSelectedDateTasks,
+      setTaskLists,
+    ]
+  );
 
-  const handleEditTask = (task) => {
-    setEditingTask(task);
-  };
-
-  const handleUpdateTask = async (updatedTask) => {
-    try {
-      const updated = await updateTaskById(updatedTask._id, updatedTask);
-
-      if (updated.success) {
-        const updatedTasks = tasksUser.map((task) =>
-          task._id === updated.data._id ? updated.data : task
-        );
-
-        const response = await api.get("/todoList/user");
-        const updatedTaskLists = response.data.data;
-
-        setTaskLists(updatedTaskLists);
-
-        setTasksUser(updatedTasks);
-        setFilteredTasksUser(updatedTasks);
-        setTasksDates(updatedTasks);
-        setSelectedDateTasks(updatedTasks);
-
-        setEditingTask(null);
-        alert("Todo updated successfully");
-        handleClose();
-      } else {
-        throw new Error(updated.message);
-      }
-    } catch (error) {
-      console.error("Failed to update todo:", error);
-      alert("Failed to update todo");
-      if (error.response && error.response.status === 401) {
-        console.log("Session expired. Logging out...");
-      } else {
-        setError("Failed to update task. Please try again.");
-      }
-    }
-  };
-
-  const handleDelete = async () => {
+  const handleDelete = useCallback(async () => {
     try {
       await deleteTaskById(id);
       setTasksUser((prevTasks) => prevTasks.filter((task) => task._id !== id));
@@ -135,7 +130,13 @@ const CartTodo = ({
       console.error("Failed to delete task:", error);
       alert("Failed to delete task");
     }
-  };
+  }, [
+    id,
+    setTasksUser,
+    setFilteredTasksUser,
+    setTasksDates,
+    setSelectedDateTasks,
+  ]);
 
   return (
     <div
@@ -161,8 +162,9 @@ const CartTodo = ({
           </div>
         )}
       </Tooltips>
-      <Tooltips title={`${title}`}>
-        <div className={responsiveText}>
+
+      <div className={responsiveText}>
+        <Tooltips title={`${title}`}>
           {index % 3 === 0 ? (
             <h3 className="title title1">{title}</h3>
           ) : index % 3 === 1 ? (
@@ -170,8 +172,8 @@ const CartTodo = ({
           ) : (
             <h3 className="title title3">{title}</h3>
           )}
-        </div>
-      </Tooltips>
+        </Tooltips>
+      </div>
 
       <div className="flex ml-1">
         <Tooltips title="Due date">
@@ -182,18 +184,16 @@ const CartTodo = ({
       </div>
 
       <div className="ml-1">
-        {/* <Tooltips title="Task Creator"> */}
         <div className="flex">
           <p className="text-[#b5b5b5]">Task Creator: </p>
           <p className="ml-2">{creator.username}</p>
         </div>
-        {/* </Tooltips> */}
       </div>
 
       <div className="mt-3 flex justify-end">
         <Tooltips title="Members">
           <AvatarGroup
-            avatars={members.map((member) => member.data.avatarUrl)}
+            avatars={members.map((member) => member.avatarUrl)}
             size={10}
           />
         </Tooltips>
@@ -241,7 +241,9 @@ CartTodo.propTypes = {
   index: PropTypes.number.isRequired,
   priority: PropTypes.string.isRequired,
   creator: PropTypes.object.isRequired,
+  members: PropTypes.array.isRequired,
   setTasksUser: PropTypes.func.isRequired,
 };
 
-export default CartTodo;
+const MemoizedCartTodo = memo(CartTodo);
+export default MemoizedCartTodo;

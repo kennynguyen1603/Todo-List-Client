@@ -1,11 +1,12 @@
-// import PropTypes from "prop-types";
-import { useRef, useEffect, useContext } from "react";
+import { useRef, useEffect, useContext, memo } from "react";
 import CartTodo from "../CardTask/CartTodo";
 import PropTypes from "prop-types";
 import { AuthContext } from "@context/AuthContext";
-const TaskList = ({ taskList }) => {
+
+const TasksList = ({ tasksList }) => {
   const listRef = useRef(null);
   const { setTasksUser } = useContext(AuthContext);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -25,19 +26,17 @@ const TaskList = ({ taskList }) => {
     );
 
     const elements = listRef.current.querySelectorAll(".task-item");
-    elements.forEach((element) => {
-      observer.observe(element);
-    });
+    elements.forEach((element) => observer.observe(element));
 
     return () => elements.forEach((element) => observer.unobserve(element));
-  }, [taskList]);
+  }, [tasksList]);
 
   return (
     <div className="task-list" ref={listRef}>
       <div className="list">
-        {taskList.map((task, index) => (
+        {tasksList.map((task, index) => (
           <CartTodo
-            key={index}
+            key={task._id}
             task={task}
             index={index}
             id={task._id}
@@ -47,6 +46,7 @@ const TaskList = ({ taskList }) => {
             processValue={task.processValue}
             priority={task.priority}
             creator={task.creatorId}
+            members={task.members}
             setTasksUser={setTasksUser}
           />
         ))}
@@ -55,8 +55,9 @@ const TaskList = ({ taskList }) => {
   );
 };
 
-export default TaskList;
-
-TaskList.propTypes = {
-  taskList: PropTypes.array.isRequired,
+TasksList.propTypes = {
+  tasksList: PropTypes.array.isRequired,
 };
+
+const MemoizedTasksList = memo(TasksList);
+export default MemoizedTasksList;
