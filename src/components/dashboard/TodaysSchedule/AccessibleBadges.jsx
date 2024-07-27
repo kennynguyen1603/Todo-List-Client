@@ -1,15 +1,13 @@
-// import IconButton from "@mui/material/IconButton";
-// import Badge from "@mui/material/Badge";
-// import MailIcon from "@mui/icons-material/Mail";
-// import { Notifications } from "@mui/icons-material";
 import { IoMdNotifications, IoIosMail } from "react-icons/io";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useMemo, memo } from "react";
 import { AuthContext } from "@context/AuthContext";
 
-export default function AccessibleBadges() {
+function AccessibleBadges() {
   const [isOpenNotifications, setIsOpenNotifications] = useState(false);
   const { invitations, setInvitations, authState, socket } =
     useContext(AuthContext);
+
+  console.log("🚀 ~ AccessibleBadges ~ invitations:", invitations);
 
   const user = authState.user;
 
@@ -25,19 +23,10 @@ export default function AccessibleBadges() {
         setInvitations(Array.from(uniqueInvitations.values()));
       };
 
-      // const handleTaskDeleted = (data) => {
-      //   const { taskId } = data;
-      //   setInvitations((prevInvitations) =>
-      //     prevInvitations.filter((invitation) => invitation.taskId !== taskId)
-      //   );
-      // };
-
       socket.on("allInvitations", handleAllInvitations);
-      // socket.on("taskDeleted", handleTaskDeleted);
 
       return () => {
         socket.off("allInvitations", handleAllInvitations);
-        // socket.off("taskDeleted", handleTaskDeleted);
       };
     }
   }, [setInvitations, socket, user]);
@@ -56,6 +45,8 @@ export default function AccessibleBadges() {
     setIsOpenNotifications(!isOpenNotifications);
   };
 
+  const memoizedInvitations = useMemo(() => invitations, [invitations]);
+
   return (
     <div className="flex text-2xl gap-2">
       <IoIosMail />
@@ -63,13 +54,26 @@ export default function AccessibleBadges() {
         <IoMdNotifications />
       </button>
       {isOpenNotifications && (
-        <div className="absolute top-16 right-0 bg-white shadow-md rounded-md p-4">
-          {invitations.length > 0 ? (
-            invitations.map((invitation) => (
-              <div key={invitation._id} className="flex gap-2">
-                <p>{invitation.from}</p>
-                <button>Accept</button>
-                <button>Reject</button>
+        <div className="absolute top-16 right-0 bg-white shadow-md rounded-md p-4 z-10">
+          {memoizedInvitations.length > 0 ? (
+            memoizedInvitations.map((invitation) => (
+              <div
+                key={invitation._id}
+                className="flex gap-5 text-sm items-center relative mt-4"
+              >
+                <div className="flex flex-grow gap-2">
+                  <p>{invitation.from.username}</p>
+                  <p>invite you join</p>
+                  <p className="text-red-600">{invitation.teamId.name}</p>
+                </div>
+                <div className="relative right-0 flex gap-2">
+                  <button className="border rounded-lg p-1.5 text-xs bg-blue-500">
+                    Accept
+                  </button>
+                  <button className="border rounded-lg p-1.5 text-xs ">
+                    Reject
+                  </button>
+                </div>
               </div>
             ))
           ) : (
@@ -80,3 +84,6 @@ export default function AccessibleBadges() {
     </div>
   );
 }
+
+const MemoizedAccessibleBadges = memo(AccessibleBadges);
+export default MemoizedAccessibleBadges;

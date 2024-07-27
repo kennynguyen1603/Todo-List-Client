@@ -120,14 +120,14 @@ const AuthProvider = ({ children }) => {
     socket.on("allInvitations", handleAllInvitations);
     socket.on("updateInvitations", handleUpdateInvitations);
     socket.on("newInvitation", handleNewInvitation);
-    socket.on("taskDeleted", handleDeleteInvitation);
+    socket.on("deleteInvitation", handleDeleteInvitation);
     socket.on("disconnect", handleDisconnect);
 
     return () => {
       socket.off("allInvitations", handleAllInvitations);
       socket.off("updateInvitations", handleUpdateInvitations);
       socket.off("newInvitation", handleNewInvitation);
-      socket.off("taskDeleted", handleDeleteInvitation);
+      socket.off("deleteInvitation", handleDeleteInvitation);
       socket.off("disconnect", handleDisconnect);
     };
   }, []);

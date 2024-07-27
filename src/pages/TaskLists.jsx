@@ -1,5 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useContext, useEffect, useCallback, useRef } from "react";
+import {
+  useState,
+  useContext,
+  useEffect,
+  useCallback,
+  useRef,
+  lazy,
+} from "react";
 import { AuthContext } from "@context/AuthContext";
 import api from "@config/axios";
 import { IoMdClose } from "react-icons/io";
@@ -9,6 +16,7 @@ import { AiOutlineTable } from "react-icons/ai";
 import { PiListLight } from "react-icons/pi";
 import TaskTableView from "@components/tasklists/TaskTableView";
 import TaskListView from "@components/tasklists/TaskListView";
+// const TaskListView = lazy(() => import("@components/tasklists/TaskListView"));
 import "@styles/viewlist/viewlist.css";
 const TaskLists = () => {
   const { taskLists, setTaskLists, tasksUser } = useContext(AuthContext);
