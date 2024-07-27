@@ -69,8 +69,13 @@ const CartTodo = ({
 
   const handleUpdateTask = useCallback(
     async (updatedTask) => {
+      console.log("🚀 ~ updatedTask:", updatedTask);
       try {
-        const updated = await updateTaskById(updatedTask._id, updatedTask);
+        const updated = await updateTaskById(updatedTask._id, {
+          ...updatedTask,
+          team_id: updatedTask.team_id._id,
+        });
+        console.log("🚀 ~ updated:", updated);
 
         if (updated.success) {
           const updatedTasks = tasksUser.map((task) =>
@@ -186,7 +191,7 @@ const CartTodo = ({
       <div className="ml-1">
         <div className="flex">
           <p className="text-[#b5b5b5]">Task Creator: </p>
-          <p className="ml-2">{creator.username}</p>
+          <p className="ml-2 text-rose-600">{creator.username}</p>
         </div>
       </div>
 

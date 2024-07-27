@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
   TextField,
   Button,
@@ -11,49 +11,38 @@ import {
   Select,
   InputLabel,
   FormControl,
+  Chip,
 } from "@mui/material";
 import PropTypes from "prop-types";
-// import { getUserById } from "@server/user";
 import DeleteIcon from "@mui/icons-material/Delete";
 import api from "@config/axios";
 import { updateTeam } from "@server/team";
+import { AuthContext } from "@context/AuthContext";
 
 const EditTaskModal = ({ task, initialMembers, onSave, onCancel }) => {
   const [formData, setFormData] = useState({
     ...task,
-    todolist: task.todolist || [],
+    todolist: task.todolist ? task.todolist.map((item) => item._id) : [],
   });
   const [teamMembers, setTeamMembers] = useState([]);
   const [selectedMembers, setSelectedMembers] = useState([]);
   const [errors, setErrors] = useState({});
-  const [lists, setLists] = useState([]);
+  const { taskLists } = useContext(AuthContext);
+
   const [emailSearch, setEmailSearch] = useState("");
 
-  const creator = task.creatorId;
-
-  useEffect(() => {
-    const fetchLists = async () => {
-      try {
-        const response = await api.get("/todoList/user");
-        setLists(response.data.data);
-      } catch (error) {
-        console.error("Failed to fetch lists:", error);
-      }
-    };
-    fetchLists();
-  }, []);
+  const creator = task.creatorId; // { _id, username, email, career, avatarUrl }
 
   useEffect(() => {
     const initializeSelectedMembers = async () => {
       if (initialMembers && Array.isArray(initialMembers)) {
         const members = initialMembers.map((member) => ({
-          _id: member.data._id,
-          username: member.data.username,
-          email: member.data.email,
+          _id: member._id,
+          username: member.username,
+          email: member.email,
         }));
 
         try {
-          // const creator = await getUserById(task.creatorId);
           const creatorInfo = {
             _id: creator._id,
             username: creator.username,
@@ -80,13 +69,7 @@ const EditTaskModal = ({ task, initialMembers, onSave, onCancel }) => {
     };
 
     initializeSelectedMembers();
-  }, [
-    creator._id,
-    creator.email,
-    creator.username,
-    initialMembers,
-    task.creatorId,
-  ]);
+  }, [creator._id, creator.email, creator.username, initialMembers]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -162,7 +145,8 @@ const EditTaskModal = ({ task, initialMembers, onSave, onCancel }) => {
     }
 
     try {
-      const updatedTeam = await updateTeam(task.team_id, {
+      const updatedTeam = await updateTeam(task.team_id._id, {
+        name: `${formData.title} Team`,
         members: selectedMemberIds,
       });
 
@@ -268,7 +252,7 @@ const EditTaskModal = ({ task, initialMembers, onSave, onCancel }) => {
             ))}
           </TextField>
 
-          <FormControl fullWidth margin="normal">
+          {/* <FormControl fullWidth margin="normal">
             <InputLabel id="select-list-label">Select Lists</InputLabel>
             <Select
               labelId="select-list-label"
@@ -279,7 +263,38 @@ const EditTaskModal = ({ task, initialMembers, onSave, onCancel }) => {
               onChange={handleListChange}
               fullWidth
             >
-              {lists.map((list) => (
+              {taskLists.map((list) => (
+                <MenuItem key={list._id} value={list._id}>
+                  {list.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl> */}
+
+          <FormControl fullWidth margin="normal" className="relative">
+            <InputLabel id="select-list-label" className="absolute bg-white">
+              Select Lists
+            </InputLabel>
+            <Select
+              labelId="select-list-label"
+              id="select-list"
+              name="todolist"
+              multiple
+              value={formData.todolist || []}
+              onChange={handleListChange}
+              fullWidth
+              renderValue={(selected) => (
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                  {selected.map((value) => (
+                    <Chip
+                      key={value}
+                      label={taskLists.find((list) => list._id === value)?.name}
+                    />
+                  ))}
+                </Box>
+              )}
+            >
+              {taskLists.map((list) => (
                 <MenuItem key={list._id} value={list._id}>
                   {list.name}
                 </MenuItem>
@@ -351,13 +366,19 @@ const EditTaskModal = ({ task, initialMembers, onSave, onCancel }) => {
 EditTaskModal.propTypes = {
   task: PropTypes.shape({
     _id: PropTypes.string.isRequired,
-    team_id: PropTypes.string.isRequired,
-    creatorId: PropTypes.object.isRequired,
+    team_id: PropTypes.object.isRequired,
+    creatorId: PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      username: PropTypes.string.isRequired,
+      email: PropTypes.string.isRequired,
+    }).isRequired,
     members: PropTypes.arrayOf(
       PropTypes.shape({
         _id: PropTypes.string.isRequired,
         username: PropTypes.string.isRequired,
         email: PropTypes.string.isRequired,
+        avatarUrl: PropTypes.string.isRequired,
+        career: PropTypes.string.isRequired,
       })
     ),
     title: PropTypes.string.isRequired,
@@ -365,7 +386,7 @@ EditTaskModal.propTypes = {
     status: PropTypes.string.isRequired,
     due_date: PropTypes.string.isRequired,
     priority: PropTypes.string.isRequired,
-    todolist: PropTypes.arrayOf(PropTypes.string),
+    todolist: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
   initialMembers: PropTypes.array.isRequired,
   onSave: PropTypes.func.isRequired,

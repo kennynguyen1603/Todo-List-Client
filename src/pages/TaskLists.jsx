@@ -1,15 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useContext, useEffect, useCallback, useRef } from "react";
-import { AuthContext } from "../context/AuthContext";
-import api from "../config/axios";
+import { AuthContext } from "@context/AuthContext";
+import api from "@config/axios";
 import { IoMdClose } from "react-icons/io";
 import { FiLoader } from "react-icons/fi";
-import { getTaskById } from "../server/todo";
+import { getTaskById } from "@server/todo";
 import { AiOutlineTable } from "react-icons/ai";
 import { PiListLight } from "react-icons/pi";
-import TaskTableView from "../components/tasklists/TaskTableView";
-import TaskListView from "../components/tasklists/TaskListView";
-import "../styles/viewlist/viewlist.css";
+import TaskTableView from "@components/tasklists/TaskTableView";
+import TaskListView from "@components/tasklists/TaskListView";
+import "@styles/viewlist/viewlist.css";
 const TaskLists = () => {
   const { taskLists, setTaskLists, tasksUser } = useContext(AuthContext);
   const [isAddTaskList, setIsAddTaskList] = useState(false);
