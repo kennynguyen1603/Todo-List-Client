@@ -6,7 +6,7 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import ItemTaskMenu from "./ItemTaskMenu";
 import { AuthContext } from "@context/AuthContext";
-import EditTaskModal from "./EditTaskModal";
+import EditTaskModal from "../Forms/EditTaskModal";
 import { deleteTaskById, updateTaskById } from "@server/todo";
 import api from "@config/axios";
 import AvatarGroup from "@components/common/AvatarGroup";
@@ -69,28 +69,68 @@ const CartTodo = ({
 
   const handleUpdateTask = useCallback(
     async (updatedTask) => {
-      console.log("🚀 ~ updatedTask:", updatedTask);
       try {
         const updated = await updateTaskById(updatedTask._id, {
           ...updatedTask,
           team_id: updatedTask.team_id._id,
         });
-        console.log("🚀 ~ updated:", updated);
 
         if (updated.success) {
-          const updatedTasks = tasksUser.map((task) =>
-            task._id === updated.data._id ? updated.data : task
-          );
+          const updatedTaskData = updated.data;
 
+          // Cập nhật các state chỉ khi task có liên quan
+          setTasksUser((prevTasksUser) => {
+            const isTaskInUserList = prevTasksUser.some(
+              (task) => task._id === updatedTaskData._id
+            );
+            if (isTaskInUserList) {
+              return prevTasksUser.map((task) =>
+                task._id === updatedTaskData._id ? updatedTaskData : task
+              );
+            }
+            return prevTasksUser;
+          });
+
+          setFilteredTasksUser((prevFilteredTasksUser) => {
+            const isTaskInFilteredList = prevFilteredTasksUser.some(
+              (task) => task._id === updatedTaskData._id
+            );
+            if (isTaskInFilteredList) {
+              return prevFilteredTasksUser.map((task) =>
+                task._id === updatedTaskData._id ? updatedTaskData : task
+              );
+            }
+            return prevFilteredTasksUser;
+          });
+
+          setTasksDates((prevTasksDates) => {
+            const isTaskInDateList = prevTasksDates.some(
+              (task) => task._id === updatedTaskData._id
+            );
+            if (isTaskInDateList) {
+              return prevTasksDates.map((task) =>
+                task._id === updatedTaskData._id ? updatedTaskData : task
+              );
+            }
+            return prevTasksDates;
+          });
+
+          setSelectedDateTasks((prevSelectedDateTasks) => {
+            const isTaskInSelectedDateList = prevSelectedDateTasks.some(
+              (task) => task._id === updatedTaskData._id
+            );
+            if (isTaskInSelectedDateList) {
+              return prevSelectedDateTasks.map((task) =>
+                task._id === updatedTaskData._id ? updatedTaskData : task
+              );
+            }
+            return prevSelectedDateTasks;
+          });
+
+          // Cập nhật danh sách task mới
           const response = await api.get("/todoList/user");
           const updatedTaskLists = response.data.data;
-
           setTaskLists(updatedTaskLists);
-
-          setTasksUser(updatedTasks);
-          setFilteredTasksUser(updatedTasks);
-          setTasksDates(updatedTasks);
-          setSelectedDateTasks(updatedTasks);
 
           setEditingTask(null);
           alert("Todo updated successfully");
@@ -109,13 +149,12 @@ const CartTodo = ({
       }
     },
     [
-      tasksUser,
-      handleClose,
       setTasksUser,
       setFilteredTasksUser,
       setTasksDates,
       setSelectedDateTasks,
       setTaskLists,
+      handleClose,
     ]
   );
 

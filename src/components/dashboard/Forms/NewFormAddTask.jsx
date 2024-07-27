@@ -12,6 +12,7 @@ import {
   IconButton,
   Select,
   InputLabel,
+  Chip,
   FormControl,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -56,10 +57,6 @@ const FormAddTask = () => {
 
   const user = localStorage.getItem("user"); // Get user from localStorage
   const userId = user ? JSON.parse(user).userId : null;
-
-  useEffect(() => {
-    console.log("🚀 ~ FormAddTask ~ selectedEmails:", selectedEmails);
-  }, [selectedEmails]);
 
   useEffect(() => {
     const fetchLists = async () => {
@@ -331,7 +328,9 @@ const FormAddTask = () => {
         </TextField>
 
         <FormControl fullWidth margin="normal">
-          <InputLabel id="select-list-label">Select Lists</InputLabel>
+          <InputLabel id="select-list-label" className="absolute bg-white">
+            Select Lists
+          </InputLabel>
           <Select
             labelId="select-list-label"
             id="select-list"
@@ -340,6 +339,16 @@ const FormAddTask = () => {
             value={formData.lists || []}
             onChange={handleListChange}
             fullWidth
+            renderValue={(selected) => (
+              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                {selected.map((value) => (
+                  <Chip
+                    key={value}
+                    label={lists.find((list) => list._id === value)?.name}
+                  />
+                ))}
+              </Box>
+            )}
           >
             {lists.map((list) => (
               <MenuItem key={list._id} value={list._id}>

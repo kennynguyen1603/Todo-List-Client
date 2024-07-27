@@ -159,12 +159,44 @@ const EditTaskModal = ({ task, initialMembers, onSave, onCancel }) => {
 
         onSave(updatedTask);
         setSelectedMembers(updatedTask.members);
+        alert("Task and team updated successfully!");
       } else {
         setErrors({ form: "Failed to update team members." });
+        alert("Failed to update team members.");
       }
     } catch (error) {
       console.error("Failed to update task:", error);
-      setErrors({ form: "Failed to update task" });
+
+      if (error.response) {
+        // Xử lý lỗi dựa trên mã lỗi HTTP hoặc thông báo từ server
+        if (error.response.status === 401) {
+          setErrors({
+            form: "Unauthorized access. You do not have permission to edit this task.",
+          });
+          alert(
+            "Unauthorized access. You do not have permission to edit this task."
+          );
+        } else if (error.response.status === 403) {
+          setErrors({
+            form: "Forbidden. You do not have permission to perform this action.",
+          });
+          alert(
+            "Forbidden. You do not have permission to perform this action."
+          );
+        } else if (error.response.status === 404) {
+          setErrors({ form: "Task not found." });
+          alert("Task not found.");
+        } else {
+          setErrors({ form: "Failed to update task. Please try again." });
+          alert("Failed to update task. Please try again.");
+        }
+      } else {
+        // Xử lý lỗi khi không có phản hồi từ server
+        setErrors({
+          form: "Network error. Please check your connection and try again.",
+        });
+        alert("Network error. Please check your connection and try again.");
+      }
     }
   };
 
