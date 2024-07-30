@@ -1,7 +1,6 @@
 import AccessibleBadges from "./AccessibleBadges";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-
 const Header = ({ user }) => {
   const navigate = useNavigate();
   if (!user) {
@@ -30,7 +29,6 @@ const Header = ({ user }) => {
     </div>
   );
 };
-export default Header;
 
 Header.propTypes = {
   user: PropTypes.shape({
@@ -39,3 +37,5 @@ Header.propTypes = {
     career: PropTypes.string,
   }),
 };
+
+export default Header;

@@ -37,8 +37,11 @@ export default {
       laptop: "1024px",
       // => @media (min-width: 1024px) { ... }
 
+      // laptop: "1440px",
+      // => @media (min-width: 1440px) { ... }
+
       desktop: "1680px",
-      // => @media (min-width: 1560px) { ... }
+      // => @media (min-width: 1680px) { ... }
     },
   },
   plugins: [import("flowbite/plugin")],

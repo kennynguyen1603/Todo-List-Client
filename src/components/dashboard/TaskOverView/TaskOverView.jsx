@@ -203,7 +203,7 @@ const TaskOverView = () => {
             onChange={handleFilterChange}
           />
         </div>
-        <div className="h-full laptop:max-h-[56vh] desktop:max-h-[58vh]">
+        <div className="h-full desktop:max-h-[60vh] laptop:max-h-[59vh]">
           <TasksList tasksList={filteredTasksUser} />
         </div>
       </div>

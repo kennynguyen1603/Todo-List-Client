@@ -67,10 +67,11 @@ function AccessibleBadges() {
                   <p className="text-red-600">{invitation.teamId.name}</p>
                 </div>
                 <div className="relative right-0 flex gap-2">
-                  <button className="border rounded-lg p-1.5 text-xs bg-blue-500">
+                  {/* <button className="border rounded-lg p-1.5 text-xs bg-blue-500"> */}
+                  <button className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-2 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-xs px-5 py-2 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2">
                     Accept
                   </button>
-                  <button className="border rounded-lg p-1.5 text-xs ">
+                  <button className="border focus:ring-2 focus:outline-none font-medium rounded-lg text-xs px-5 py-2 text-center inline-flex items-center me-2 mb-2">
                     Reject
                   </button>
                 </div>
